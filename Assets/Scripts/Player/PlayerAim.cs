@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerAim : MonoBehaviour
 {
-    public Camera gameCamera;
+    [HideInInspector] public CanvasManager canvasManager;
+    [HideInInspector] public Camera gameCamera;
 
     [SerializeField]
     private InputActionReference aim;
@@ -42,6 +43,8 @@ public class PlayerAim : MonoBehaviour
             touchWorldPosition.y = transform.position.y;
 
             transform.LookAt(touchWorldPosition);
+
+            canvasManager.UpdatePlayerRadar(transform.localRotation.eulerAngles.y);
         }
     }
 }

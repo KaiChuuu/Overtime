@@ -29,4 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
         playerBody.MovePosition(playerBody.position + direction * speed);
     }
+
+    //Used to move to spawn
+    public void SetPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
 }

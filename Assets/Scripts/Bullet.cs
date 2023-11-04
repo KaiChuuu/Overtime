@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float duration = 3.0f;
-    public float damage = 100f;
+    [HideInInspector] public float speed = 50.0f;
+    [HideInInspector] public float duration = 3.0f;
+    [HideInInspector] public float damage = 25;
+    private Color color = Color.magenta;
+
+    public string opposingTag = string.Empty;
 
     private Rigidbody bulletbody;
     private BoxCollider boxCollider;
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
     {
         bulletbody = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
+        gameObject.GetComponent<Renderer>().material.color = color;
     }
 
     // Start is called before the first frame update
@@ -33,6 +35,11 @@ public class Bullet : MonoBehaviour
     {
         bulletbody.MovePosition(transform.position + transform.forward * Time.deltaTime * speed);
         velocity = (transform.position - previous) / Time.deltaTime;
+    }
+
+    public void UpdateBulletColor(Color newColor)
+    {
+        gameObject.GetComponent<Renderer>().material.color = newColor;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -59,20 +66,17 @@ public class Bullet : MonoBehaviour
 
     void DamageEnemy(ContactPoint collider, string tag)
     {
-        /*
         if (tag == opposingTag)
         {
      
-            TankHealth targetHealth = collider.otherCollider.gameObject.GetComponent<TankHealth>();
+            PlayerHealth targetHealth = collider.otherCollider.gameObject.GetComponent<PlayerHealth>();
 
             if (!targetHealth) return;
 
             targetHealth.TakeDamage(damage);
 
             Destroy(gameObject);
-            
-        }
-        */
+        } 
     }
 
     void BulletCollision(Collider collider)
