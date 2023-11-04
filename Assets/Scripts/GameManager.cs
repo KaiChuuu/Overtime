@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public CameraControl cameraControl;
 
-    public GameObject[] targets;
-    public GameObject player;
+    public GameObject[] cameraTargets;
+    public PlayerManager player;
 
     // Start is called before the first frame update
     void Start()
@@ -24,21 +24,26 @@ public class GameManager : MonoBehaviour
     private void SetCameraTargets()
     {
         //Create collection of transforms for each tank
-        Transform[] gameTargets = new Transform[targets.Length];
+        Transform[] gameTargets = new Transform[cameraTargets.Length];
 
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < cameraTargets.Length; i++)
         {
             //Set targets to each tank transform
-            gameTargets[i] = targets[i].transform;
+            gameTargets[i] = cameraTargets[i].transform;
         }
 
         //Set targets camera will follow
         cameraControl.targets = gameTargets;
     }
 
+    public void GameSetup()
+    {
+        player.Setup();
+    }
+
     public void GameStart()
     {
-
+        player.StartGame();
     }
 
     public void GameEnd()
