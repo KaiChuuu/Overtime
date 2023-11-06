@@ -9367,7 +9367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyParent: {fileID: 1353453643}
-  enemies:
+  enemyManager:
     enemyTypes:
     - {fileID: 11400000, guid: 94b98e6a8583b504e8c81099fa2e0cbe, type: 2}
     gameDifficulty: 0

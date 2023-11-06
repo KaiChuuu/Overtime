@@ -16,6 +16,7 @@ public class EnemyManager
 
     //Pecentage chance of a enemy type being drawn
     //Based on index of enemyTypes
+    [Tooltip("Pecentage chance of a enemy type being drawn.\nValues are based on index of enemyTypes.")]
     public List<int> enemyBucket;
 
     public void SetUp()
@@ -68,5 +69,16 @@ public class EnemyManager
         int bucketChoice = UnityEngine.Random.Range(0, enemyBucket.Count);
 
         return enemyTypes[enemyBucket[bucketChoice]];
+    }
+
+    public void UpdateEnemyStats(EnemySO enemySO, ref GameObject enemy)
+    {
+        //Calculation for increasing stats
+        float speed = 0f;
+        float damage = 0f;
+        float health = 0f;
+
+        //Update enemy
+        enemy.GetComponent<EnemyBaseStats>().SetBaseStats(speed, damage, health);
     }
 }

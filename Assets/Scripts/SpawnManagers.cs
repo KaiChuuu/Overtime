@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnManagers : MonoBehaviour
 {
     public GameObject enemyParent;
-    public EnemyManager enemies;
+    public EnemyManager enemyManager;
     public BoxCollider[] enemySpawners;
     private int activeSpawners = 2;          //Based as index range for enemySpawner array
 
@@ -22,7 +22,7 @@ public class SpawnManagers : MonoBehaviour
     void Awake()
     {
         spawnDelay = startingSpawnDelay;
-        enemies.SetUp();
+        enemyManager.SetUp();
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class SpawnManagers : MonoBehaviour
         if(timer > spawnDelay)
         {
             timer = 0f;
-            SpawnEnemy(enemies.GetEnemy());
+            SpawnEnemy(enemyManager.GetEnemy());
         }
     }
 
@@ -77,11 +77,12 @@ public class SpawnManagers : MonoBehaviour
         newEnemy.transform.position = spawn;
 
         //open enemy type, and update values depending on difficulty
+        enemyManager.UpdateEnemyStats(enemySO, ref newEnemy);
     }
 
     public void IncreaseDifficulty(int difficulty)
     {
-        enemies.IncreaseDifficulty(difficulty);
+        enemyManager.IncreaseDifficulty(difficulty);
 
         //Reduce spawn time
         if(spawnDelay > minSpawnDelay)
@@ -108,6 +109,6 @@ public class SpawnManagers : MonoBehaviour
         //Rest spawn information
         spawnDelay = startingSpawnDelay;
         activeSpawners = 2;
-        enemies.ResetGame();
+        enemyManager.ResetGame();
     }
 }
