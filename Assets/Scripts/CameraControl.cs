@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    public float dampTime = 0.2f;
+    public float inGameDampTime = 0.2f;
+    public float introDampTime = 1.0f;
     public float screenEdgeBuffer = 4f;
     public float minSize = 6.5f;
     [HideInInspector] public Transform[] targets;
@@ -12,10 +13,13 @@ public class CameraControl : MonoBehaviour
 
     private Vector3 moveVelocity; //Reference velocity for smooth damping of camera position
     private float zoomSpeed; //Reference velocity for smooth damping of camera size
+    private float dampTime;
 
     private void Awake()
     {
         gameCamera = GetComponentInChildren<Camera>();
+        StartingScreenSize();
+        SetCameraPositionAndSize();
     }
 
     private void FixedUpdate()
@@ -84,6 +88,22 @@ public class CameraControl : MonoBehaviour
         size = Mathf.Max(size, minSize); //Bound size of screen
 
         return size;
+    }
+
+    public void StartingScreenSize()
+    {
+        minSize = 80f;
+        dampTime = introDampTime;
+    }
+
+    public void IngameScreenSize()
+    {
+        minSize = 15f;
+    }
+
+    public void IngameDampTime()
+    {
+        dampTime = inGameDampTime;
     }
 
     //Manually update camera position and size

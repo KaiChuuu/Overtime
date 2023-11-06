@@ -6,8 +6,11 @@ public class PlayerHealth : MonoBehaviour
 {
     public float startingHealth = 100f;
 
+    [HideInInspector] public PlayerMovement movement;
+    [HideInInspector] public PlayerShoot shoot;
     [HideInInspector] public CanvasManager canvasManager;
 
+    public GameObject playerModel;
     public float currentHealth;
     private bool dead;
 
@@ -22,15 +25,19 @@ public class PlayerHealth : MonoBehaviour
         dead = false;
 
         canvasManager.UpdatePlayerHealth(currentHealth);
+
+        playerModel.SetActive(true);
     }
 
     void OnDeath()
     {
         dead = true;
 
-        //Explosion Animations?
+        //Death animation
 
-        gameObject.SetActive(false);
+        canvasManager.GameEnd();
+
+        playerModel.SetActive(false);
     }
 
     public void TakeDamage(float amount)

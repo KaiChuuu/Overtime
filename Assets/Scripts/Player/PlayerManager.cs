@@ -32,6 +32,8 @@ public class PlayerManager
         shoot.canvasManager = canvas;
         aim.canvasManager = canvas;
         aim.gameCamera = gameCamera;
+
+        ResetPlayer();
     }
 
     public void EquipWeapon(WeaponSO weaponType)
@@ -61,11 +63,9 @@ public class PlayerManager
 
     public void ResetPlayer()
     {
-        //Disable shooting
-
-
         //Default weapon kit
         EquipWeapon(defaultWeapon);
+        weapon.DisableGun();
 
         movement.SetPosition(spawnPoint.position);
 
@@ -76,9 +76,14 @@ public class PlayerManager
 
     public void StartGame()
     {
-        //Reset/Update Values
-        ResetPlayer();
-
         shoot.canShoot = true;
+        movement.canMove = true;
+        weapon.EnableGun();
+    }
+    
+    public void EndGame()
+    {
+        shoot.canShoot = false;
+        movement.canMove = false;
     }
 }

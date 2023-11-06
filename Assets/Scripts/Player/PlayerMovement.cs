@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 0.1f;
+    public float speed = 10f;
+    public bool canMove = false;
 
     [SerializeField]
     private InputActionReference movement;
@@ -12,22 +13,25 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInputValue;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerBody = GetComponent<Rigidbody>();
+     
+        //Disable Movement
+        canMove = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        movementInputValue = movement.action.ReadValue<Vector2>();
-    }
-
     void FixedUpdate()
     {
-        Vector3 direction = new Vector3(movementInputValue.x, 0, movementInputValue.y);
+        if (canMove)
+        {
+            movementInputValue = movement.action.ReadValue<Vector2>();
 
-        playerBody.MovePosition(playerBody.position + direction * speed);
+            Vector3 direction = new Vector3(movementInputValue.x, 0, movementInputValue.y);
+
+            playerBody.AddForce(direction * speed, ForceMode.Force);
+        }
     }
 
     //Used to move to spawn
