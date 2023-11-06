@@ -149,6 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 944020134498209327}
   - component: {fileID: 3886931187113867047}
+  - component: {fileID: 1539412498053119503}
   m_Layer: 0
   m_Name: Ninja
   m_TagString: Untagged
@@ -179,7 +180,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8401773170638852068}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 3.5
@@ -194,3 +195,17 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1539412498053119503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401773170638852068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9c9492abcc7b14cbb35457e5ff19ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 0
+  enemyDamage: 0
