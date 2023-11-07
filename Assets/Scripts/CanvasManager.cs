@@ -103,6 +103,11 @@ public class CanvasManager : MonoBehaviour
         scenePanels[0].SetActive(true);
     }
 
+    public void UpdateKillCount(int enemyScore)
+    {
+        gameManager.UpdateKillCount(enemyScore);
+    }
+
     ////////////////////////////////////////////////////
     /// Game Scene
     ////////////////////////////////////////////////////

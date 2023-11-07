@@ -68,14 +68,14 @@ public class Bullet : MonoBehaviour
     {
         if (tag == opposingTag)
         {
-     
-            PlayerHealth targetHealth = collider.otherCollider.gameObject.GetComponent<PlayerHealth>();
 
-            if (!targetHealth) return;
+            EntityHealth targetHealth = collider.otherCollider.gameObject.GetComponent<EntityHealth>();
 
-            targetHealth.TakeDamage(damage);
-
-            Destroy(gameObject);
+            if (targetHealth != null) //If it hits a box collider from another part
+            {
+                targetHealth.TakeDamage(damage);
+                Destroy(gameObject);
+            }
         } 
     }
 

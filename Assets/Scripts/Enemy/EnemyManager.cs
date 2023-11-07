@@ -12,16 +12,21 @@ public class EnemyManager
     private int nextEnemyType = 1;
 
     public int gameDifficulty = 0;
-    public int spawnLimit = 20;
+
+    private GameObject player;
+    private CanvasManager canvasManager;
 
     //Pecentage chance of a enemy type being drawn
     //Based on index of enemyTypes
     [Tooltip("Pecentage chance of a enemy type being drawn.\nValues are based on index of enemyTypes.")]
     public List<int> enemyBucket;
 
-    public void SetUp()
+    public void SetUp(ref GameObject gamePlayer, ref CanvasManager canvas)
     {
         enemyBucket = new List<int>();
+        player = gamePlayer;
+        canvasManager = canvas;
+
         ResetGame();
     }
 
@@ -74,11 +79,28 @@ public class EnemyManager
     public void UpdateEnemyStats(EnemySO enemySO, ref GameObject enemy)
     {
         //Calculation for increasing stats
-        float speed = 0f;
-        float damage = 0f;
-        float health = 0f;
+
+        float speed = enemySO.speed;
+        float damage = enemySO.damage;
+        float health = enemySO.health;
+
+        if (enemySO.enemyDifficulty + enemySO.difficultyCap > gameDifficulty)
+        {
+            speed += gameDifficulty * enemySO.speedScale;
+            damage += gameDifficulty * enemySO.damageScale;
+            health += gameDifficulty * enemySO.healthScale;
+        }
+        else
+        {
+            //Game difficulty is past max
+            speed += enemySO.difficultyCap * enemySO.speedScale;
+            damage += enemySO.difficultyCap * enemySO.damageScale;
+            health += enemySO.difficultyCap * enemySO.healthScale;
+        }
 
         //Update enemy
-        enemy.GetComponent<EnemyBaseStats>().SetBaseStats(speed, damage, health);
+        enemy.GetComponent<EnemyBaseStats>().SetEnemyTarget(ref player);
+        enemy.GetComponent<EnemyBaseStats>().SetEnemyComponents(enemySO.scorePoints, ref canvasManager);
+        enemy.GetComponent<EnemyBaseStats>().SetBaseStats(speed, damage, health, enemySO.attackingRange);
     }
 }

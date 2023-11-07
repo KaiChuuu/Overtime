@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class SpawnManagers : MonoBehaviour
 {
+    public GameObject player;
+    public CanvasManager canvasManager;
+
     public GameObject enemyParent;
     public EnemyManager enemyManager;
     public BoxCollider[] enemySpawners;
     private int activeSpawners = 2;          //Based as index range for enemySpawner array
 
+    public int spawnLimit = 20;
     public bool canSpawn = false;
     public float startingSpawnDelay = 3f;    //Starting amount of time between each enemy spawns
     public float minSpawnDelay = 1f;         //Minimum amount of time between each enemy spawns
@@ -18,17 +22,18 @@ public class SpawnManagers : MonoBehaviour
 
     private float timer = 0f;
 
-    // Start is called before the first frame update
-    void Awake()
+    public void Setup(ref GameObject gamePlayer)
     {
         spawnDelay = startingSpawnDelay;
-        enemyManager.SetUp();
+
+        player = gamePlayer;
+        enemyManager.SetUp(ref player, ref canvasManager);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canSpawn)
+        if (canSpawn && enemyParent.transform.childCount <= spawnLimit)
         {
             UpdateTimer();
         }
@@ -109,6 +114,13 @@ public class SpawnManagers : MonoBehaviour
         //Rest spawn information
         spawnDelay = startingSpawnDelay;
         activeSpawners = 2;
+
+        //Destroy remaining enemy objects
+        foreach(Transform child in enemyParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         enemyManager.ResetGame();
     }
 }
