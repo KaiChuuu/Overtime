@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - BulletSpawn
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - Player
   - Radar
-  - 
+  - Enemy
   - 
   - 
   - 

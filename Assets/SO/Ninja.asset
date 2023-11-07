@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Ninja
   enemy: {fileID: 8401773170638852068, guid: a8aec17d3360c5e478ae51d8230e9057, type: 3}
+  scorePoints: 10
   speed: 3
   damage: 10
   health: 50
   speedScale: 2
   damageScale: 2
   healthScale: 2
+  attackingRange: 2
   bucketAmount: 5
   enemyDifficulty: 0
   difficultyCap: 5

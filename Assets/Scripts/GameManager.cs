@@ -15,9 +15,12 @@ public class GameManager : MonoBehaviour
     public float diffStepUpTime = 10f; //Time interval between each difficulty increase
     private float timer = 0;
 
-    // Player scores
     private bool gameActive = false;
+
+    // Player scores
     private float gameTime = 0f;
+    private int totalKills = 0;
+    private int totalScore = 0;
     //
 
 
@@ -68,10 +71,12 @@ public class GameManager : MonoBehaviour
         cameraControl.targets = gameTargets;
     }
 
+    //Only on game launch
     public void GameSetup()
     {
         cameraControl.StartingScreenSize();
         player.Setup();
+        spawners.Setup(ref player.player);
     }
 
     public void GameIntro()
@@ -86,16 +91,20 @@ public class GameManager : MonoBehaviour
         cameraControl.StartingScreenSize();
         player.ResetPlayer();
 
-        //WHERE I WOULD RESET SCORES.
+        //Reset game stats
+        gameDifficulty = 0;
+        timer = 0f;
+        gameTime = 0f;
+        totalKills = 0;
+        totalScore = 0;
     }
 
-    //Results are shown
+    //Results are shown; Game stops here
     public void GameEnd()
     {
         player.EndGame();
         gameActive = false;
         spawners.ResetSpawningManager();
-        //Stop game here
     }
 
     public void GameStart()
@@ -105,5 +114,12 @@ public class GameManager : MonoBehaviour
         player.StartGame();
         gameActive = true;
         spawners.EnableSpawning();
+    }
+
+    public void UpdateKillCount(int enemyScore)
+    {
+        totalScore += enemyScore;
+
+        totalKills++;
     }
 }

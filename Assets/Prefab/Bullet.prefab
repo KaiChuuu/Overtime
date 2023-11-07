@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4129785029777223439}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,5 +149,4 @@ MonoBehaviour:
   speed: 75
   duration: 3
   damage: 100
-  color: {r: 0.098039225, g: 0.098039225, b: 0.098039225, a: 0}
   opposingTag: Enemy

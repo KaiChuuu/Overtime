@@ -478,7 +478,6 @@ GameObject:
   - component: {fileID: 30665946}
   - component: {fileID: 30665949}
   - component: {fileID: 30665948}
-  - component: {fileID: 30665947}
   m_Layer: 6
   m_Name: LeftShoulder
   m_TagString: Untagged
@@ -501,27 +500,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 536328099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &30665947
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30665945}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &30665948
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3892,7 +3870,6 @@ GameObject:
   - component: {fileID: 457981708}
   - component: {fileID: 457981711}
   - component: {fileID: 457981710}
-  - component: {fileID: 457981709}
   m_Layer: 6
   m_Name: RightShoulder
   m_TagString: Untagged
@@ -3915,27 +3892,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 536328099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &457981709
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 457981707}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &457981710
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5354,7 +5310,7 @@ GameObject:
   - component: {fileID: 536328101}
   - component: {fileID: 536328102}
   m_Layer: 6
-  m_Name: Shoulders
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5368,15 +5324,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536328098}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 997683936}
   - {fileID: 30665946}
   - {fileID: 457981708}
   - {fileID: 925813610}
-  m_Father: {fileID: 1623497615}
+  m_Father: {fileID: 2021836315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &536328100
 MonoBehaviour:
@@ -8775,7 +8732,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -9366,12 +9323,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026ec2825e4cb624cb4f5548c09188b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  canvasManager: {fileID: 1518662123}
   enemyParent: {fileID: 1353453643}
   enemyManager:
     enemyTypes:
     - {fileID: 11400000, guid: 94b98e6a8583b504e8c81099fa2e0cbe, type: 2}
     gameDifficulty: 0
-    spawnLimit: 20
     enemyBucket: 
   enemySpawners:
   - {fileID: 643950934}
@@ -9379,6 +9337,7 @@ MonoBehaviour:
   - {fileID: 699972863}
   - {fileID: 245204639}
   - {fileID: 1064354108}
+  spawnLimit: 20
   canSpawn: 0
   startingSpawnDelay: 3
   minSpawnDelay: 1
@@ -11005,12 +10964,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997683935}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1623497615}
+  m_Father: {fileID: 536328099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &997683938
 MeshRenderer:
@@ -18666,39 +18625,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609709896}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1623497614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1623497615}
-  m_Layer: 6
-  m_Name: Model
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1623497615
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623497614}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 997683936}
-  - {fileID: 536328099}
-  m_Father: {fileID: 2021836315}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641260975
 GameObject:
   m_ObjectHideFlags: 0
@@ -21255,7 +21181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1623497615}
+  - {fileID: 536328099}
   - {fileID: 890436836}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21322,7 +21248,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1.4963623, z: 1}
@@ -21343,7 +21269,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   shoot: {fileID: 0}
   canvasManager: {fileID: 1518662123}
-  playerModel: {fileID: 1623497614}
+  playerModel: {fileID: 536328098}
   currentHealth: 100
 --- !u!54 &2021836321
 Rigidbody:
@@ -21354,7 +21280,7 @@ Rigidbody:
   m_GameObject: {fileID: 2021836314}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.5
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0.5, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -21367,10 +21293,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 0
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 32
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &2029448599
 GameObject:
