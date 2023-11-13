@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public CanvasManager canvasManager;
+    public EnvironmentManager envManager;
     public CameraControl cameraControl;
 
     public GameObject[] cameraTargets;
@@ -15,10 +17,11 @@ public class GameManager : MonoBehaviour
     public float diffStepUpTime = 10f; //Time interval between each difficulty increase
     private float timer = 0;
 
+    public GameTimeManager timeManager;
+
     private bool gameActive = false;
 
     // Player scores
-    private float gameTime = 0f;
     private int totalKills = 0;
     private int totalScore = 0;
     //
@@ -35,8 +38,6 @@ public class GameManager : MonoBehaviour
     {
         if (gameActive)
         {
-            gameTime += Time.deltaTime;
-
             UpdateDifficulty();
         }
     }
@@ -75,8 +76,9 @@ public class GameManager : MonoBehaviour
     public void GameSetup()
     {
         cameraControl.StartingScreenSize();
-        player.Setup();
+        player.Setup(ref canvasManager);
         spawners.Setup(ref player.player);
+        timeManager.Setup(ref canvasManager, ref player.player);
     }
 
     public void GameIntro()
@@ -94,7 +96,7 @@ public class GameManager : MonoBehaviour
         //Reset game stats
         gameDifficulty = 0;
         timer = 0f;
-        gameTime = 0f;
+        timeManager.ResetTimes();
         totalKills = 0;
         totalScore = 0;
     }
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
         player.EndGame();
         gameActive = false;
         spawners.ResetSpawningManager();
+        timeManager.UpdateGameStatus(false);
     }
 
     public void GameStart()
@@ -114,6 +117,7 @@ public class GameManager : MonoBehaviour
         player.StartGame();
         gameActive = true;
         spawners.EnableSpawning();
+        timeManager.UpdateGameStatus(true);
     }
 
     public void UpdateKillCount(int enemyScore)
@@ -121,5 +125,28 @@ public class GameManager : MonoBehaviour
         totalScore += enemyScore;
 
         totalKills++;
+    }
+
+    public void UpdateLeftGameColor(float time)
+    {
+        envManager.UpdateLeftWalls(time);
+    }
+
+    public void UpdateRightGameColor(float time)
+    {
+        envManager.UpdateRightWalls(time);
+    }
+
+    public void UpdateBothGameColor(string name)
+    {
+        switch (name)
+        {
+            case "freeze":
+                envManager.FreezeColor();
+                break;
+            case "default":
+                envManager.DefaultWalls();
+                break;
+        }
     }
 }

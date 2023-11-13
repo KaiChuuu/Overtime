@@ -61,6 +61,9 @@ public class Bullet : MonoBehaviour
             case "EnemyBullet":
                 BulletCollision(collider.otherCollider);
                 break;
+            case "OOB":
+                Destroy(gameObject);
+                break;
         }
     }
 
