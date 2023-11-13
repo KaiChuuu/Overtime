@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerManager
 {
-    public CanvasManager canvas;
+    private CanvasManager canvas;
     public Camera gameCamera;
     public Transform projectilePool;
 
@@ -18,8 +18,10 @@ public class PlayerManager
     private PlayerAim aim;
     private PlayerWeapon weapon;
 
-    public void Setup()
+    public void Setup(ref CanvasManager canvasManager)
     {   
+        canvas = canvasManager;
+
         //Grab Player Scripts
         health = player.GetComponent<PlayerHealth>();
         movement = player.GetComponent<PlayerMovement>();

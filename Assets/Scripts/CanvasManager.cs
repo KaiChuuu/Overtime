@@ -13,7 +13,12 @@ public class CanvasManager : MonoBehaviour
     public float gameIntroOutroDelay = 3f;
     private float timer = 0f;
     private bool gameIntroPlaying = false;
+    private bool earlyDisplay = false;
     private bool gameOutroPlaying = false;
+
+    public TMPro.TMP_Text gameTime;
+    public TMPro.TMP_Text leftTime;
+    public TMPro.TMP_Text rightTime;
 
     public Slider healthSlider;
     public Image healthBar;
@@ -53,12 +58,18 @@ public class CanvasManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
+        //Display UI slightly earlier
+        if(earlyDisplay && timer > gameIntroOutroDelay / 2)
+        {
+            earlyDisplay = false;
+            scenePanels[1].SetActive(true);
+        }
+
         if(timer > gameIntroOutroDelay)
         {
             timer = 0f;
             gameIntroPlaying = false;
             gameManager.GameStart();
-            scenePanels[1].SetActive(true);
         }
     }
 
@@ -80,6 +91,7 @@ public class CanvasManager : MonoBehaviour
 
         gameManager.GameIntro();
         gameIntroPlaying = true;
+        earlyDisplay = true;
     }
 
     public void GameEnd()
@@ -101,11 +113,6 @@ public class CanvasManager : MonoBehaviour
     public void GameMenu()
     {
         scenePanels[0].SetActive(true);
-    }
-
-    public void UpdateKillCount(int enemyScore)
-    {
-        gameManager.UpdateKillCount(enemyScore);
     }
 
     ////////////////////////////////////////////////////
@@ -147,5 +154,56 @@ public class CanvasManager : MonoBehaviour
     public void UpdatePlayerRadar(float playerRotation)
     {
         playerRadar.localEulerAngles = new Vector3(0, 0, -playerRotation);
+    }
+
+    public void UpdateKillCount(int enemyScore)
+    {
+        gameManager.UpdateKillCount(enemyScore);
+    }
+
+    public void UpdateGameTime(string time)
+    {
+        gameTime.text = time;
+    }
+
+    public void UpdateLeftTimer(float time, bool display)
+    {
+        leftTime.text = time.ToString();
+
+        if (display)
+        {
+            UpdateLeftUIColor(time);
+            gameManager.UpdateLeftGameColor(time);
+        }
+    }
+
+    void UpdateLeftUIColor(float time)
+    {
+        //UI change color
+
+    }
+
+    public void UpdateRightTimer(float time, bool display)
+    {
+        rightTime.text = time.ToString();
+
+        if (display)
+        {
+            UpdateRightUIColor(time);
+            gameManager.UpdateRightGameColor(time);
+        }
+    }
+
+    void UpdateRightUIColor(float time)
+    {
+        //UI change color
+
+    }
+
+    public void UpdateFreezeColor()
+    {
+        //UI change color
+
+        gameManager.UpdateBothGameColor("freeze");
     }
 }
