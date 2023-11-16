@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 8901963688855797973}
   - component: {fileID: 7290057101178376222}
   - component: {fileID: 1057149678461502112}
-  - component: {fileID: 3272442960790910427}
   m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
@@ -149,27 +148,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3272442960790910427
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3599568295627100003}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4605822961425574568
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,12 +331,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.9217639, y: 1.6882215, z: 1.376383}
+  m_Center: {x: 0.043009035, y: 0.037216548, z: 0.10799834}
 --- !u!114 &6838416202280933694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +480,6 @@ GameObject:
   - component: {fileID: 3649112084435313699}
   - component: {fileID: 6473373556788590933}
   - component: {fileID: 5079601949724508383}
-  - component: {fileID: 2044103203651047175}
   m_Layer: 8
   m_Name: RightShoulder
   m_TagString: Enemy
@@ -575,27 +552,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2044103203651047175
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6925240514401551335}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7007369627768103922
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +598,6 @@ GameObject:
   - component: {fileID: 1545406747794272053}
   - component: {fileID: 3922250431885277777}
   - component: {fileID: 2758770201848242266}
-  - component: {fileID: 665083193636670624}
   m_Layer: 8
   m_Name: LeftShoulder
   m_TagString: Enemy
@@ -715,27 +670,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &665083193636670624
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7571264218127075681}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8401773170638852068
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,11 +738,11 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 2
   m_Acceleration: 1.5
   avoidancePriority: 50
   m_AngularSpeed: 220
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 0.25
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -831,6 +765,7 @@ MonoBehaviour:
   basicEnemyAttack: {fileID: 6838416202280933694}
   basicEnemyHealth: {fileID: 4038402479500167037}
   enemyHealth: 0
+  survivalLimit: 60
 --- !u!114 &4038402479500167037
 MonoBehaviour:
   m_ObjectHideFlags: 0

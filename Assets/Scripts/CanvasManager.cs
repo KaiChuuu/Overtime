@@ -10,12 +10,15 @@ public class CanvasManager : MonoBehaviour
     public GameObject[] scenePanels;
 
     /// Game Scene
-    public float gameIntroOutroDelay = 3f;
+    public float gameIntroOutroDelay = 5f;
     private float timer = 0f;
     private bool gameIntroPlaying = false;
     private bool earlyDisplay = false;
     private bool gameOutroPlaying = false;
 
+    private int clockTimes = 60; //Assuming clocks start 60
+    public Image leftTimerBg;
+    public Image rightTimerBg;
     public TMPro.TMP_Text gameTime;
     public TMPro.TMP_Text leftTime;
     public TMPro.TMP_Text rightTime;
@@ -32,6 +35,9 @@ public class CanvasManager : MonoBehaviour
     public Slider reloadSlider;
 
     public RectTransform playerRadar;
+
+    /// End Scene
+    public TMPro.TMP_Text finalTime;
 
     void Start()
     {
@@ -59,7 +65,7 @@ public class CanvasManager : MonoBehaviour
         timer += Time.deltaTime;
 
         //Display UI slightly earlier
-        if(earlyDisplay && timer > gameIntroOutroDelay / 2)
+        if(earlyDisplay && timer > gameIntroOutroDelay - 1f)
         {
             earlyDisplay = false;
             scenePanels[1].SetActive(true);
@@ -98,6 +104,9 @@ public class CanvasManager : MonoBehaviour
     {
         scenePanels[1].SetActive(false);
         scenePanels[2].SetActive(true);
+
+        //Update endsceen UI
+        finalTime.text = gameTime.text;
 
         gameManager.GameEnd();
     }
@@ -180,7 +189,7 @@ public class CanvasManager : MonoBehaviour
     void UpdateLeftUIColor(float time)
     {
         //UI change color
-
+        leftTimerBg.color = Color.Lerp(healthColors[1], healthColors[0], time / clockTimes);
     }
 
     public void UpdateRightTimer(float time, bool display)
@@ -197,7 +206,7 @@ public class CanvasManager : MonoBehaviour
     void UpdateRightUIColor(float time)
     {
         //UI change color
-
+        rightTimerBg.color = Color.Lerp(healthColors[1], healthColors[0], time / clockTimes);
     }
 
     public void UpdateFreezeColor()
@@ -206,4 +215,14 @@ public class CanvasManager : MonoBehaviour
 
         gameManager.UpdateBothGameColor("freeze");
     }
+
+    public void Unfreeze() 
+    {
+        gameManager.Unfreeze();
+    }
+
+    ////////////////////////////////////////////////////
+    /// End Scene
+    ////////////////////////////////////////////////////
+
 }

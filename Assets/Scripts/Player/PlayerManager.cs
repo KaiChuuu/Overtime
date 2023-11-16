@@ -7,6 +7,7 @@ public class PlayerManager
     private CanvasManager canvas;
     public Camera gameCamera;
     public Transform projectilePool;
+    public Transform particlePool;
 
     public GameObject player;
     public WeaponSO defaultWeapon;
@@ -45,6 +46,7 @@ public class PlayerManager
 
         //Bullet
         shoot.projectilePool = projectilePool;
+        shoot.particlePool = particlePool;
         shoot.bulletPrefab = weaponType.bullet;
         shoot.bulletSpeed = weaponType.bulletSpeed;
         shoot.bulletDuration = weaponType.bulletDuration;

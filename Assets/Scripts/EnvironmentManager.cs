@@ -19,39 +19,47 @@ public class EnvironmentManager : MonoBehaviour
 
     public void DefaultWalls()
     {
-        leftWalls[0].SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
-        leftWalls[1].SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
-
-        rightWalls[0].SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
-        rightWalls[1].SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
-
-        middleWalls[0].SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
+        foreach (Material left in leftWalls)
+        {
+            left.SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
+        }
+        foreach (Material right in rightWalls)
+        {
+            right.SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
+        }
+        foreach (Material middle in middleWalls)
+        {
+            middle.SetColor("_EmissionColor", defaultColor.emissionColor * defaultColor.emissionStrength);
+        }
     }
 
     public void UpdateLeftWalls(float time)
     {
-        leftWalls[0].SetColor("_EmissionColor",
-            Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
-
-        leftWalls[1].SetColor("_EmissionColor",
-            Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
+        foreach (Material left in leftWalls)
+        {
+            left.SetColor("_EmissionColor",
+                    Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
+        }
     }
 
     public void UpdateRightWalls(float time)
     {
-        rightWalls[0].SetColor("_EmissionColor",
-            Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
-
-        rightWalls[1].SetColor("_EmissionColor",
-            Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
+        foreach (Material right in rightWalls)
+        {
+            right.SetColor("_EmissionColor",
+                    Color.Lerp(lowHP.emissionColor, maxHP.emissionColor, time / clockTimes) * defaultColor.emissionStrength);
+        }
     }
 
     public void FreezeColor()
     {
-        leftWalls[0].SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
-        leftWalls[1].SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
-
-        rightWalls[0].SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
-        rightWalls[1].SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
+        foreach (Material left in leftWalls)
+        {
+            left.SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
+        }
+        foreach (Material right in rightWalls)
+        {
+            right.SetColor("_EmissionColor", freeze.emissionColor * freeze.emissionStrength);
+        }
     }
 }

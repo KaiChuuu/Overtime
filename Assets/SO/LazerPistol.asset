@@ -18,6 +18,6 @@ MonoBehaviour:
   ammo: 6
   bullet: {fileID: 4651239424693208098, guid: a4cf4bcf4c90ba847809f3d271c51510, type: 3}
   bulletColor: {r: 1, g: 0.89088523, b: 0, a: 0}
-  bulletSpeed: 75
+  bulletSpeed: 65
   bulletDamage: 25
   bulletDuration: 4
