@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public float inGameDampTime = 0.2f;
-    public float introDampTime = 1.0f;
+    public float introDampTime = 5f;
     public float screenEdgeBuffer = 4f;
     public float minSize = 6.5f;
     [HideInInspector] public Transform[] targets;

@@ -98,9 +98,11 @@ public class EnemyManager
             health += enemySO.difficultyCap * enemySO.healthScale;
         }
 
+        float slowdownSpeed = gameDifficulty * enemySO.speedScale + enemySO.slowSpeed;
+
         //Update enemy
         enemy.GetComponent<EnemyBaseStats>().SetEnemyTarget(ref player);
         enemy.GetComponent<EnemyBaseStats>().SetEnemyComponents(enemySO.scorePoints, ref canvasManager);
-        enemy.GetComponent<EnemyBaseStats>().SetBaseStats(speed, damage, health, enemySO.attackingRange);
+        enemy.GetComponent<EnemyBaseStats>().SetBaseStats(speed, slowdownSpeed, damage, health, enemySO.attackingRange);
     }
 }

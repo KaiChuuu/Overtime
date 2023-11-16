@@ -94,6 +94,8 @@ public class GameTimeManager : MonoBehaviour
                     //Update colors to remove frozen effect
                     UpdateSideTimerUI(rightTimer, "right", true);
                     UpdateSideTimerUI(leftTimer, "left", true);
+
+                    canvasManager.Unfreeze();
                 }
       
             }

@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bulletPrefab;
     [HideInInspector] public CanvasManager canvasManager;
     [HideInInspector] public Transform projectilePool;
+    [HideInInspector] public Transform particlePool;
     [HideInInspector] public float bulletSpeed;
     [HideInInspector] public float bulletDuration;
     [HideInInspector] public float bulletDamage;
@@ -82,5 +83,6 @@ public class PlayerShoot : MonoBehaviour
         bulletComp.duration = bulletDuration;
         bulletComp.damage = bulletDamage;
         bulletComp.UpdateBulletColor(bulletColor);
+        bulletComp.particlePool = particlePool;
     }
 }

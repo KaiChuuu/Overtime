@@ -123,4 +123,28 @@ public class SpawnManagers : MonoBehaviour
 
         enemyManager.ResetGame();
     }
+
+    public void FreezeEnemies()
+    {
+        foreach(Transform child in enemyParent.transform)
+        {
+            BasicEnemyAI enemy = child.gameObject.GetComponent<BasicEnemyAI>();
+            if(enemy != null)
+            {
+                enemy.SlowdownSpeed();
+            }
+        }
+    }
+
+    public void UnfreezeEnemies()
+    {
+        foreach (Transform child in enemyParent.transform)
+        {
+            BasicEnemyAI enemy = child.gameObject.GetComponent<BasicEnemyAI>();
+            if (enemy != null)
+            {
+                enemy.SetDefaultSpeed();
+            }
+        }
+    }
 }

@@ -143,10 +143,16 @@ public class GameManager : MonoBehaviour
         {
             case "freeze":
                 envManager.FreezeColor();
+                spawners.FreezeEnemies();
                 break;
             case "default":
                 envManager.DefaultWalls();
                 break;
         }
+    }
+
+    public void Unfreeze()
+    {
+        spawners.UnfreezeEnemies();
     }
 }

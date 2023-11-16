@@ -22,10 +22,9 @@ public class BasicEnemyAttack : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        ContactPoint collider = collision.contacts[0];
-        string tag = collider.otherCollider.tag;
+        string tag = collider.tag;
         switch (tag)
         {
             case "Player":
@@ -34,9 +33,9 @@ public class BasicEnemyAttack : MonoBehaviour
         }
     }
 
-    void DamagePlayer(ContactPoint collider, string tag)
+    void DamagePlayer(Collider collider, string tag)
     {
-        EntityHealth targetHealth = collider.otherCollider.gameObject.GetComponent<EntityHealth>();
+        EntityHealth targetHealth = collider.gameObject.GetComponent<EntityHealth>();
         if (targetHealth != null) //If it hits a box collider from another part of the target
         {
             targetHealth.TakeDamage(enemyDamage);

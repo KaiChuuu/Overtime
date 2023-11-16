@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public ParticleSystem explosionParticle;
+
+    [HideInInspector] public Transform particlePool;
     [HideInInspector] public float speed = 50.0f;
     [HideInInspector] public float duration = 3.0f;
     [HideInInspector] public float damage = 25;
@@ -37,6 +40,11 @@ public class Bullet : MonoBehaviour
         velocity = (transform.position - previous) / Time.deltaTime;
     }
 
+    void OnDestroy()
+    {
+        Instantiate(explosionParticle, transform.position, transform.rotation, particlePool);
+    }
+
     public void UpdateBulletColor(Color newColor)
     {
         gameObject.GetComponent<Renderer>().material.color = newColor;
@@ -50,6 +58,7 @@ public class Bullet : MonoBehaviour
         {
             case "Wall":
                 var direction = Vector3.Reflect(velocity.normalized, collider.normal);
+                if (direction.sqrMagnitude <= 0) return;
                 transform.rotation = Quaternion.LookRotation(direction);
                 previous = transform.position;
                 break;

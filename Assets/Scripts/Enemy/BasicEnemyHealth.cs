@@ -9,18 +9,6 @@ public class BasicEnemyHealth : MonoBehaviour, EntityHealth
     public int enemyScore = 0;
     public float enemyHealth = 50f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(float amount)
     {
         enemyHealth -= amount;
