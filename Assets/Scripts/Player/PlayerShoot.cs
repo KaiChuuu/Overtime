@@ -20,6 +20,7 @@ public class PlayerShoot : MonoBehaviour
     public int ammo = 0;
     private float timer = 0f;
 
+    public AudioSource weaponAudio;
     public BoxCollider bulletSpawnLocation;
     [SerializeField]
     private InputActionReference shoot;
@@ -84,5 +85,7 @@ public class PlayerShoot : MonoBehaviour
         bulletComp.damage = bulletDamage;
         bulletComp.UpdateBulletColor(bulletColor);
         bulletComp.particlePool = particlePool;
+
+        weaponAudio.Play();
     }
 }

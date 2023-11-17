@@ -6,8 +6,14 @@ public class CanvasManager : MonoBehaviour
 {
     /// Scene Controller
     public GameManager gameManager;
+    public AudioManager audioManager;
     [Tooltip("0: Start Panel, 1: Game Panel, 2: End Panel")]
     public GameObject[] scenePanels;
+
+    /// Menu Scene
+    public GameObject muttedAudio;
+    public GameObject unmuttedAudio;
+    public bool muteAudio = false;
 
     /// Game Scene
     public float gameIntroOutroDelay = 5f;
@@ -76,6 +82,9 @@ public class CanvasManager : MonoBehaviour
             timer = 0f;
             gameIntroPlaying = false;
             gameManager.GameStart();
+            if (!muteAudio) {
+                audioManager.PlayBgMusic();
+            }
         }
     }
 
@@ -93,6 +102,8 @@ public class CanvasManager : MonoBehaviour
 
     public void GameStart()
     {
+        audioManager.StartEndButtonAudio();
+
         scenePanels[0].SetActive(false);
 
         gameManager.GameIntro();
@@ -102,8 +113,15 @@ public class CanvasManager : MonoBehaviour
 
     public void GameEnd()
     {
+        audioManager.GameOverAudio();
+
         scenePanels[1].SetActive(false);
         scenePanels[2].SetActive(true);
+
+        if (!muteAudio)
+        {
+            audioManager.StopBgMusic();
+        }
 
         //Update endsceen UI
         finalTime.text = gameTime.text;
@@ -113,6 +131,8 @@ public class CanvasManager : MonoBehaviour
 
     public void GameOutroScene()
     {
+        audioManager.StartEndButtonAudio();
+
         gameManager.GameOutro();
         gameOutroPlaying = true;
 
@@ -122,6 +142,29 @@ public class CanvasManager : MonoBehaviour
     public void GameMenu()
     {
         scenePanels[0].SetActive(true);
+    }
+
+    ////////////////////////////////////////////////////
+    /// Menu Scene
+    ////////////////////////////////////////////////////
+    public void MuteAudio()
+    {
+        audioManager.DefaultButtonAudio();
+
+        unmuttedAudio.SetActive(false);
+        muttedAudio.SetActive(true);
+
+        muteAudio = true;
+    }
+
+    public void UnmuteAudio()
+    {
+        audioManager.DefaultButtonAudio();
+
+        muttedAudio.SetActive(false);
+        unmuttedAudio.SetActive(true);
+
+        muteAudio = false;
     }
 
     ////////////////////////////////////////////////////
