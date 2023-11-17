@@ -9,6 +9,7 @@ public class PlayerWeapon : MonoBehaviour
 
     private GameObject currentWeapon;
     public BoxCollider bulletSpawn; //Bullet Spawn Zone is CHILD of WeaponParent
+    public AudioSource weaponAudio;
 
     public void EquipWeapon(GameObject weapon)
     {
@@ -21,6 +22,7 @@ public class PlayerWeapon : MonoBehaviour
 
         currentWeapon = Instantiate(weapon, weaponParent.transform);
         bulletSpawn = currentWeapon.GetComponentInChildren<BoxCollider>();
+        weaponAudio = currentWeapon.GetComponent<AudioSource>();
         if (!bulletSpawn)
         {
             Debug.Log("No spawn for bullets (error?!?)");

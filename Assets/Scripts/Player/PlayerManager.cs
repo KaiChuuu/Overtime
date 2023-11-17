@@ -60,6 +60,7 @@ public class PlayerManager
         weapon.EquipWeapon(weaponType.gun);
 
         shoot.bulletSpawnLocation = weapon.bulletSpawn; //Updated after EquipWeapon()
+        shoot.weaponAudio = weapon.weaponAudio;
 
         //Canvas Weapon UI
         canvas.SetWeaponUI(weaponType.weaponName, weaponType.ammo, weaponType.reloadDelay);
