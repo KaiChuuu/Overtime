@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class BasicEnemyAttack : MonoBehaviour
 {
-    public GameObject target;
+    [HideInInspector] public GameObject target;
+    [HideInInspector] public Animator animator;
 
     public float enemyDamage = 10f;
-    public float attackRange = 10f;
+    public float attackRange = 5f;
+
+    private int attackingHash;
+
+    void Awake()
+    {
+        attackingHash = Animator.StringToHash("Attack");
+    }
 
     public void Update()
     {
@@ -19,6 +27,7 @@ public class BasicEnemyAttack : MonoBehaviour
         if (target && Vector3.Distance(transform.position, target.transform.position) < attackRange)
         {
             //Start weapon animation, sword/shooting/etc
+            animator.SetTrigger(attackingHash);
         }
     }
 

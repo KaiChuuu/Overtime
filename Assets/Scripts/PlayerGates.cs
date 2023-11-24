@@ -3,6 +3,15 @@ using UnityEngine;
 public class PlayerGates : MonoBehaviour
 {
     public GameObject[] gateBeams;
+    private AudioSource gateNoise;
+
+    public AudioClip gateDisable;
+    public AudioClip gateActive;
+
+    void Awake()
+    {
+        gateNoise = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -12,6 +21,10 @@ public class PlayerGates : MonoBehaviour
             {
                 gateBeams[i].SetActive(false);
             }
+            gateNoise.loop = false;
+            gateNoise.Stop();
+            gateNoise.clip = gateDisable;
+            gateNoise.Play();
         }
     }
     
@@ -23,6 +36,10 @@ public class PlayerGates : MonoBehaviour
             {
                 gateBeams[i].SetActive(true);
             }
+            gateNoise.Stop();
+            gateNoise.clip = gateActive;
+            gateNoise.loop = true;
+            gateNoise.Play();
         }
     }
 }

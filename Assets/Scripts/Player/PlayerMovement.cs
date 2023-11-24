@@ -12,11 +12,15 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerBody;
     private Vector2 movementInputValue;
 
+    [HideInInspector] public Animator animator;
+    private int walkingHash;
+
     // Start is called before the first frame update
     void Awake()
     {
+        walkingHash = Animator.StringToHash("Walking");
         playerBody = GetComponent<Rigidbody>();
-     
+        
         //Disable Movement
         canMove = false;
     }
@@ -28,9 +32,22 @@ public class PlayerMovement : MonoBehaviour
         {
             movementInputValue = movement.action.ReadValue<Vector2>();
 
+            if(movementInputValue.x != 0 || movementInputValue.y != 0)
+            {
+                animator.SetBool(walkingHash, true);
+            }
+            else if(movementInputValue.x == 0 && movementInputValue.y == 0)
+            {
+                animator.SetBool(walkingHash, false);
+            }
+
             Vector3 direction = new Vector3(movementInputValue.x, 0, movementInputValue.y);
 
             playerBody.AddForce(direction * speed, ForceMode.Force);
+        }
+        else
+        {
+            animator.SetBool(walkingHash, false);
         }
     }
 

@@ -14,16 +14,12 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
     public float currentHealth;
     private bool dead;
 
-    public void Start()
-    {
-        canvasManager.SetHealthSlider(startingHealth);
-    }
-
     public void Setup()
     {
         currentHealth = startingHealth;
         dead = false;
 
+        canvasManager.SetHealthSlider(startingHealth);
         canvasManager.UpdatePlayerHealth(currentHealth);
 
         playerModel.SetActive(true);
