@@ -15,14 +15,14 @@ MonoBehaviour:
   enemyName: Ninja
   enemy: {fileID: 8401773170638852068, guid: a8aec17d3360c5e478ae51d8230e9057, type: 3}
   scorePoints: 10
-  speed: 2
+  speed: 4
   slowSpeed: 2
-  damage: 10
+  damage: 5
   health: 50
   speedScale: 0.5
   damageScale: 2
   healthScale: 2
-  attackingRange: 2
+  attackingRange: 4
   bucketAmount: 5
   enemyDifficulty: 0
   difficultyCap: 5

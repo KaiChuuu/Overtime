@@ -62,6 +62,7 @@ public class PlayerShoot : MonoBehaviour
             ammo = maxAmmo;
             canvasManager.UpdateWeaponAmmo(ammo);
             canvasManager.UpdateReloadBar(reloadDelay);
+            canvasManager.DisableReloadBar();
         }
     }
 
@@ -73,6 +74,11 @@ public class PlayerShoot : MonoBehaviour
         }
         ammo--;
         canvasManager.UpdateWeaponAmmo(ammo);
+
+        if(ammo == 0)
+        {
+            canvasManager.EnableReloadBar();
+        }
 
 
         //Wrap in 'if' for multiple types of weapons

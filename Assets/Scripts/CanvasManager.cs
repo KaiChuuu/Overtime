@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Reflection;
+using System.Collections;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -33,6 +35,9 @@ public class CanvasManager : MonoBehaviour
     public Image healthBar;
     [Tooltip("0: Full Health, 1: Zero Health")]
     public Color[] healthColors;
+    public SpriteRenderer[] damageIndicators;
+    public Color damageIndicatorColor;
+    private bool indicatorActive = false;
 
     public TMPro.TMP_Text currentAmmo;
     public TMPro.TMP_Text maxAmmo;
@@ -179,9 +184,43 @@ public class CanvasManager : MonoBehaviour
 
     public void UpdatePlayerHealth(float health)
     {
+        if(!indicatorActive && health < healthSlider.value)
+        {
+            //Flash damage Indicator
+            indicatorActive = true;
+            StartCoroutine(DamageIndication());
+        }
+
         healthSlider.value = health;
 
         healthBar.color = Color.Lerp(healthColors[1], healthColors[0], health / healthSlider.maxValue);
+    }
+
+    IEnumerator DamageIndication()
+    {
+        //Display red
+        for (int i = 0; i < 4; i++)
+        {
+            damageIndicatorColor.a += 0.25f;
+            foreach (SpriteRenderer border in damageIndicators)
+            {
+                border.color = damageIndicatorColor;
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        //Remove red
+        for (int i = 0; i < 4; i++)
+        {
+            damageIndicatorColor.a -= 0.25f;
+            foreach (SpriteRenderer border in damageIndicators)
+            {
+                border.color = damageIndicatorColor;
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        indicatorActive = false;
     }
 
     public void SetWeaponUI(string name, int ammo, float reloadDelay)
@@ -201,6 +240,16 @@ public class CanvasManager : MonoBehaviour
     public void UpdateReloadBar(float duration)
     {
         reloadSlider.value = duration;
+    }
+
+    public void DisableReloadBar()
+    {
+        reloadSlider.gameObject.SetActive(false);
+    }
+
+    public void EnableReloadBar()
+    {
+        reloadSlider.gameObject.SetActive(true);
     }
 
     public void UpdatePlayerRadar(float playerRotation)

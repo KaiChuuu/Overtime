@@ -19,6 +19,8 @@ public class PlayerManager
     private PlayerAim aim;
     private PlayerWeapon weapon;
 
+    private Animator animator;
+
     public void Setup(ref CanvasManager canvasManager)
     {   
         canvas = canvasManager;
@@ -29,12 +31,14 @@ public class PlayerManager
         shoot = player.GetComponentInChildren<PlayerShoot>();
         aim = player.GetComponentInChildren<PlayerAim>();
         weapon = player.GetComponentInChildren<PlayerWeapon>();
+        animator = player.GetComponent<Animator>();
 
         //Pass Values
         health.canvasManager = canvas;
         shoot.canvasManager = canvas;
         aim.canvasManager = canvas;
         aim.gameCamera = gameCamera;
+        movement.animator = animator;
 
         ResetPlayer();
     }

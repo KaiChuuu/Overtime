@@ -15,6 +15,7 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
     private GameObject target;
 
     private NavMeshAgent agent;
+    private Animator animator;
 
     private float time = 0f;
     public float survivalLimit = 60f; //failsafe for looping the same enemies
@@ -25,6 +26,7 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -65,6 +67,8 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
 
     public void SetEnemyTarget(ref GameObject gameTarget)
     {
+        basicEnemyAttack.animator = animator;
+
         target = gameTarget;
         basicEnemyAttack.target = gameTarget;
     }
