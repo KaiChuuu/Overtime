@@ -39,15 +39,13 @@ public class PlayerManager
         aim.canvasManager = canvas;
         aim.gameCamera = gameCamera;
         movement.animator = animator;
+        weapon.playerManager = this;
 
         ResetPlayer();
     }
 
     public void EquipWeapon(WeaponSO weaponType)
     {
-        //Disable shooting while equip weapon occurs
-        shoot.canShoot = false;
-
         //Bullet
         shoot.projectilePool = projectilePool;
         shoot.particlePool = particlePool;
@@ -58,7 +56,8 @@ public class PlayerManager
         shoot.bulletColor = weaponType.bulletColor;
         shoot.reloadDelay = weaponType.reloadDelay;
         shoot.maxAmmo = weaponType.ammo;
-        shoot.ammo = weaponType.ammo;
+        shoot.maxClip = weaponType.clip;
+        shoot.ammo = weaponType.clip;
 
         //Weapon
         weapon.EquipWeapon(weaponType.gun);
@@ -67,11 +66,14 @@ public class PlayerManager
         shoot.weaponAudio = weapon.weaponAudio;
 
         //Canvas Weapon UI
-        canvas.SetWeaponUI(weaponType.weaponName, weaponType.ammo, weaponType.reloadDelay);
+        canvas.SetWeaponUI(weaponType.weaponName, weaponType.clip, weaponType.ammo, weaponType.reloadDelay, weaponType.gunModel);
     }
 
     public void ResetPlayer()
     {
+        //Disable shooting while equip weapon occurs
+        shoot.canShoot = false;
+
         //Default weapon kit
         EquipWeapon(defaultWeapon);
         weapon.DisableGun();

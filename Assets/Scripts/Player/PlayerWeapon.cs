@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    [HideInInspector] public PlayerManager playerManager;
+
     public GameObject weaponParent;
     public string bulletSpawnTag = "BulletSpawn";
 
@@ -22,11 +24,19 @@ public class PlayerWeapon : MonoBehaviour
 
         currentWeapon = Instantiate(weapon, weaponParent.transform);
         bulletSpawn = currentWeapon.GetComponentInChildren<BoxCollider>();
+        bulletSpawn.center = new Vector3(bulletSpawn.center.x + weaponParent.transform.position.x,
+                                        bulletSpawn.center.y + weaponParent.transform.position.y,
+                                        bulletSpawn.center.z + weaponParent.transform.position.z);
         weaponAudio = currentWeapon.GetComponent<AudioSource>();
         if (!bulletSpawn)
         {
             Debug.Log("No spawn for bullets (error?!?)");
         }
+    }
+
+    public void AttachNewGun(WeaponSO newWeapon)
+    {
+        playerManager.EquipWeapon(newWeapon);
     }
 
     public void DisableGun()

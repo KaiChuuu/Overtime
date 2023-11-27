@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Reflection;
 using System.Collections;
+using System;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -27,7 +27,11 @@ public class CanvasManager : MonoBehaviour
     private int clockTimes = 60; //Assuming clocks start 60
     public Image leftTimerBg;
     public Image rightTimerBg;
+    public Color gameTimeDefault;
+    public Color gameTimeEnd;
+    public Color gamePredictedHighscore;
     public TMPro.TMP_Text gameTime;
+    public TMPro.TMP_Text gameScore;
     public TMPro.TMP_Text leftTime;
     public TMPro.TMP_Text rightTime;
 
@@ -41,20 +45,34 @@ public class CanvasManager : MonoBehaviour
 
     public TMPro.TMP_Text currentAmmo;
     public TMPro.TMP_Text maxAmmo;
-    public Sprite weapon2DModel; //or 3d model
+    public Sprite weapon2DModel;
     public TMPro.TMP_Text weaponName;
     public Slider reloadSlider;
 
     public RectTransform playerRadar;
 
     /// End Scene
+    public GameObject highscorePanel;
+    public TMPro.TMP_InputField nameInputField;
     public TMPro.TMP_Text finalTime;
+    public TMPro.TMP_Text finalScore;
+    public TMPro.TMP_Text finalKillTotal;
+    public TMPro.TMP_Text finalRank;
+    public TMPro.TMP_Text finalPlayerName;
+
+    /// Leaderboard Scene
+    public LeaderboardDisplay leaderboardDisplay;
 
     void Start()
     {
+        nameInputField.onValidateInput += delegate (string input, int charIndex, char addedChar) {
+            return NameInputValidator(addedChar);
+        };
+
         scenePanels[0].SetActive(true);
         scenePanels[1].SetActive(false);
         scenePanels[2].SetActive(false);
+        scenePanels[3].SetActive(false);
 
         gameManager.GameSetup();
     }
@@ -108,6 +126,7 @@ public class CanvasManager : MonoBehaviour
     public void GameStart()
     {
         audioManager.StartEndButtonAudio();
+        audioManager.UnmuteEnvironmentAudio();
 
         scenePanels[0].SetActive(false);
 
@@ -118,24 +137,71 @@ public class CanvasManager : MonoBehaviour
 
     public void GameEnd()
     {
+        gameManager.GameEnd();
+
         audioManager.GameOverAudio();
 
         scenePanels[1].SetActive(false);
-        scenePanels[2].SetActive(true);
 
         if (!muteAudio)
         {
             audioManager.StopBgMusic();
         }
+        audioManager.MuteEnvironmentAudio();
 
         //Update endsceen UI
         finalTime.text = gameTime.text;
 
-        gameManager.GameEnd();
+        StartCoroutine(GameOverDelay());
     }
 
-    public void GameOutroScene()
+    public void GameEndScores(int score, int kills, bool isHighscore, int rank)
     {
+        //Update endsceen UI
+        finalScore.text = score.ToString();
+        finalKillTotal.text = kills.ToString();
+
+        if (isHighscore)
+        {
+            highscorePanel.SetActive(true);
+            finalRank.text = "#" + rank.ToString();
+        }
+        else
+        {
+            highscorePanel.SetActive(false);
+        }
+    }
+
+    public char NameInputValidator(char addedChar)
+    {
+        if(addedChar >= 'A' &&  addedChar <= 'Z')
+        {
+            return addedChar;
+        }else if(addedChar >= 'a' && addedChar <= 'z')
+        {
+            return Char.ToUpper(addedChar);
+        }
+        return '\0';
+    }
+
+    public void UpdateHighscoreStatus(string name)
+    {
+        gameManager.leaderboardmanager.UpdateCurrentHighscoreName(name);
+    }
+
+    IEnumerator GameOverDelay()
+    {
+        yield return new WaitForSeconds(3f);
+
+        scenePanels[2].SetActive(true);
+
+        gameManager.EndScreen();
+    }
+
+    public async void GameOutroScene()
+    {
+        await gameManager.leaderboardmanager.AddScore();
+
         audioManager.StartEndButtonAudio();
 
         gameManager.GameOutro();
@@ -147,6 +213,20 @@ public class CanvasManager : MonoBehaviour
     public void GameMenu()
     {
         scenePanels[0].SetActive(true);
+    }
+
+    public void LeaderboardScene()
+    {
+        scenePanels[0].SetActive(false);
+        scenePanels[3].SetActive(true);
+
+        leaderboardDisplay.DisplayLeaderboard();
+    }
+
+    public void ToMenuFromLeaderboard()
+    {
+        scenePanels[0].SetActive(true);
+        scenePanels[3].SetActive(false);
     }
 
     ////////////////////////////////////////////////////
@@ -223,18 +303,24 @@ public class CanvasManager : MonoBehaviour
         indicatorActive = false;
     }
 
-    public void SetWeaponUI(string name, int ammo, float reloadDelay)
+    public void SetWeaponUI(string name, int clip, int ammo, float reloadDelay, Sprite gunModel)
     {
         weaponName.text = name.ToString();
-        currentAmmo.text = ammo.ToString();
+        currentAmmo.text = clip.ToString();
         maxAmmo.text = "/" + ammo.ToString();
         reloadSlider.maxValue = reloadDelay;
         reloadSlider.value = reloadDelay;
+        weapon2DModel = gunModel;
     }
 
     public void UpdateWeaponAmmo(int ammo)
     {
         currentAmmo.text = ammo.ToString();
+    }
+
+    public void UpdateWeaponMaxAmmo(int ammo)
+    {
+        maxAmmo.text = "/" + ammo.ToString();
     }
 
     public void UpdateReloadBar(float duration)
@@ -267,13 +353,44 @@ public class CanvasManager : MonoBehaviour
         gameTime.text = time;
     }
 
+    public void UpdateGameTimeColor(string color)
+    {
+        switch (color)
+        {
+            case "Red":
+                gameTime.color = gameTimeEnd;
+                break;
+            case "White":
+                gameTime.color = gameTimeDefault;
+                break;
+        }
+    }
+
+    public void UpdateGameScore(int score)
+    {
+        gameScore.text = score.ToString();
+    }
+
+    public void UpdateGameScoreColor(string color)
+    {
+        switch (color)
+        {
+            case "Blue":
+                gameScore.color = gamePredictedHighscore;
+                break;
+            case "White":
+                gameScore.color = gameTimeDefault;
+                break;
+        }
+    }
+
     public void UpdateLeftTimer(float time, bool display)
     {
         leftTime.text = time.ToString();
+        UpdateLeftUIColor(time);
 
         if (display)
         {
-            UpdateLeftUIColor(time);
             gameManager.UpdateLeftGameColor(time);
         }
     }
@@ -287,10 +404,10 @@ public class CanvasManager : MonoBehaviour
     public void UpdateRightTimer(float time, bool display)
     {
         rightTime.text = time.ToString();
+        UpdateRightUIColor(time);
 
         if (display)
         {
-            UpdateRightUIColor(time);
             gameManager.UpdateRightGameColor(time);
         }
     }

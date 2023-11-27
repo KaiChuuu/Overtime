@@ -5,9 +5,11 @@ public class WeaponSO : ScriptableObject
 {
     public string weaponName;
 
+    public Sprite gunModel;
     public GameObject gun;    
     public float reloadDelay;
     public int ammo;
+    public int clip;
 
     public GameObject bullet;
     public Color bulletColor;

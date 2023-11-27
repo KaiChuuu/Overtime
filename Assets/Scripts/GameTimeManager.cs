@@ -9,6 +9,7 @@ public class GameTimeManager : MonoBehaviour
 
     private CanvasManager canvasManager;
     private GameObject player;
+    private PlayerHealth playerHealth;
 
     //In seconds
     public float leftMaxTime = 60f;
@@ -19,6 +20,10 @@ public class GameTimeManager : MonoBehaviour
     public float gameTime = 0f;
 
     private bool gameActive = false;
+    private bool gameIsEnding = false;
+
+    private float dmgTick = 4f;
+    private int playerDmg = 20;
 
     public float freezeDuration = 5f; //Also the time gained within the duration
     private bool freezeTime = false;
@@ -28,12 +33,18 @@ public class GameTimeManager : MonoBehaviour
     {
         canvasManager = canvas;
         player = gamePlayer;
+        playerHealth = player.GetComponentInChildren<PlayerHealth>();
         ResetTimes();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameIsEnding)
+        {
+            timer += Time.deltaTime;
+        }
+
         if (gameActive)
         {
             gameTime += Time.deltaTime;
@@ -42,36 +53,64 @@ public class GameTimeManager : MonoBehaviour
                 if (player.transform.position.x < mapDivider.position.x)
                 {
                     //Player is on left side of map
-                    if (leftTimer > 0f)
+                    if (leftTimer > 1f)
                     {
                         leftTimer -= Time.deltaTime;
                         UpdateSideTimerUI(leftTimer, "left", true);
                     }
                     else
                     {
-                        //Game Over
+                        if (gameIsEnding)
+                        {
+                            //Damage
+                            if (timer > dmgTick)
+                            {
+                                timer = 0f;
+                                //Damage player
+                                playerHealth.TakeDamage(playerDmg);
+                            }
+                        } 
+                        else
+                        {
+                            //Game Over
+                            gameIsEnding = true;
+                        }                        
                     }
 
-                    IncreaseRightTimer(true);
+                    if (rightTimer > 1f) IncreaseRightTimer(true);
                 }
                 else
                 {
                     //Player is on right side of map
-                    if (rightTimer > 0f)
+                    if (rightTimer > 1f)
                     {
                         rightTimer -= Time.deltaTime;
                         UpdateSideTimerUI(rightTimer, "right", true);
                     }
                     else
                     {
-                        //Game Over
+                        if (gameIsEnding)
+                        {
+                            //Damage
+                            if (timer > dmgTick)
+                            {
+                                timer = 0f;
+                                //Damage player
+                                playerHealth.TakeDamage(playerDmg);
+                            }
+                        }
+                        else
+                        {
+                            //Game Over
+                            gameIsEnding = true;
+                        }
                     }
 
-                    IncreaseLeftTimer(true);
+                    if(leftTimer > 1f) IncreaseLeftTimer(true);
                 }
 
                 //Check if times are equal
-                if (Mathf.FloorToInt(leftTimer) == Mathf.FloorToInt(rightTimer))
+                if (Mathf.FloorToInt(leftTimer) == Mathf.FloorToInt(rightTimer) && !gameIsEnding)
                 {
                     UpdateFrozenGame();
                     freezeTime = true;
@@ -148,6 +187,12 @@ public class GameTimeManager : MonoBehaviour
         float minute = Mathf.FloorToInt(time / 60);
         float seconds = Mathf.FloorToInt(time % 60);
 
+        if(minute >= 60)
+        {
+            gameIsEnding = true;
+            canvasManager.UpdateGameTimeColor("Red");
+        }
+
         string currentTime = string.Format("{00:00} : {1:00}", minute, seconds);
         canvasManager.UpdateGameTime(currentTime);
     }
@@ -156,7 +201,6 @@ public class GameTimeManager : MonoBehaviour
     {
         gameActive = active;
     }
-    
 
     public void ResetTimes()
     {
@@ -168,9 +212,14 @@ public class GameTimeManager : MonoBehaviour
         canvasManager.UpdateRightTimer(rightTimer, true);
         
         gameTime = 0f;
+        gameIsEnding = false;
+
+        timer = 0f;
+        freezeTime = false;
 
         //Update game UIs
         string currentTime = string.Format("{00:00} : {1:00}", 0, 0);
         canvasManager.UpdateGameTime(currentTime);
+        canvasManager.UpdateGameTimeColor("White");
     }
 }

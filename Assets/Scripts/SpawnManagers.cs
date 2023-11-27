@@ -10,8 +10,10 @@ public class SpawnManagers : MonoBehaviour
 
     public GameObject enemyParent;
     public EnemyManager enemyManager;
+
+    [Tooltip("Order of spawners corresponds to when they are active")]
     public BoxCollider[] enemySpawners;
-    private int activeSpawners = 2;          //Based as index range for enemySpawner array
+    private int activeSpawners = 1;          //Based as index range for enemySpawner array
 
     public int spawnLimit = 20;
     public bool canSpawn = false;
@@ -94,6 +96,22 @@ public class SpawnManagers : MonoBehaviour
         {
             spawnDelay -= spawnDelayDecayTime;
         }
+
+        switch (difficulty)
+        {
+            case 2:
+                //Stage 2 spawners
+                activeSpawners = 2;
+                break;
+            case 4:
+                //Stage 3 spawners
+                activeSpawners = 3;
+                break;
+            case 6:
+                //Stage 4 spawners
+                activeSpawners = 4;
+                break;
+        }
     }
 
     public void EnableSpawning()
@@ -113,7 +131,7 @@ public class SpawnManagers : MonoBehaviour
 
         //Rest spawn information
         spawnDelay = startingSpawnDelay;
-        activeSpawners = 2;
+        activeSpawners = 1;
 
         //Destroy remaining enemy objects
         foreach(Transform child in enemyParent.transform)

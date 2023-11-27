@@ -18,7 +18,7 @@ public class EnemyManager
 
     //Pecentage chance of a enemy type being drawn
     //Based on index of enemyTypes
-    [Tooltip("Pecentage chance of a enemy type being drawn.\nValues are based on index of enemyTypes.")]
+    [Tooltip("Pecentage chance of an enemy type being drawn.\nValues are based on index of enemyTypes.")]
     public List<int> enemyBucket;
 
     public void SetUp(ref GameObject gamePlayer, ref CanvasManager canvas)

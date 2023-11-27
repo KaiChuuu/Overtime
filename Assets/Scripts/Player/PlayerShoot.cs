@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
+    [HideInInspector] public PlayerWeapon playerWeapon;
+
     public GameObject bulletPrefab;
     [HideInInspector] public CanvasManager canvasManager;
     [HideInInspector] public Transform projectilePool;
@@ -11,6 +13,7 @@ public class PlayerShoot : MonoBehaviour
     [HideInInspector] public float bulletDuration;
     [HideInInspector] public float bulletDamage;
     [HideInInspector] public int maxAmmo;
+    [HideInInspector] public int maxClip;
     [HideInInspector] public Color bulletColor;
 
     public string weaponName;  //Used for differentiating different guns
@@ -35,7 +38,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ammo <= 0)
+        if(ammo <= 0 && maxAmmo > 0)
         {
             ShootDelay();
         }
@@ -59,8 +62,10 @@ public class PlayerShoot : MonoBehaviour
         if(timer > reloadDelay)
         {
             timer = 0f;
-            ammo = maxAmmo;
+            ammo = maxClip;
+            maxAmmo -= maxClip;
             canvasManager.UpdateWeaponAmmo(ammo);
+            canvasManager.UpdateWeaponMaxAmmo(maxAmmo);
             canvasManager.UpdateReloadBar(reloadDelay);
             canvasManager.DisableReloadBar();
         }
@@ -75,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
         ammo--;
         canvasManager.UpdateWeaponAmmo(ammo);
 
-        if(ammo == 0)
+        if(ammo == 0 && maxAmmo > 0)
         {
             canvasManager.EnableReloadBar();
         }

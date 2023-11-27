@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public LeaderboardManager leaderboardmanager;
+
     public CanvasManager canvasManager;
     public EnvironmentManager envManager;
     public CameraControl cameraControl;
@@ -19,13 +21,14 @@ public class GameManager : MonoBehaviour
 
     public GameTimeManager timeManager;
 
+    private bool predicationActivated = false;
+
     private bool gameActive = false;
 
     // Player scores
     private int totalKills = 0;
     private int totalScore = 0;
     //
-
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +55,10 @@ public class GameManager : MonoBehaviour
             {
                 timer = 0;
                 gameDifficulty++;
+
+                //**These methods are sensitive to difficulty change**
                 spawners.IncreaseDifficulty(gameDifficulty);
+                envManager.OpenStages(gameDifficulty);
             }
         }
     }
@@ -90,6 +96,7 @@ public class GameManager : MonoBehaviour
     //Scene goes back to menu
     public void GameOutro()
     {
+        envManager.ResetStages();
         cameraControl.StartingScreenSize();
         player.ResetPlayer();
 
@@ -99,15 +106,33 @@ public class GameManager : MonoBehaviour
         timeManager.ResetTimes();
         totalKills = 0;
         totalScore = 0;
+        canvasManager.UpdateGameScore(totalScore);
+        canvasManager.UpdateGameScoreColor("White");
+        predicationActivated = false;
     }
 
-    //Results are shown; Game stops here
-    public void GameEnd()
+    //Player endscreen delay; Game stops here
+    public async void GameEnd()
     {
+        //Determine if its a top 5 highscore
+        int rank = await leaderboardmanager.GetPlayerLeaderboardRank(totalScore);
+        bool isHighscore = false;
+        if(rank != -1)
+        {
+            isHighscore = true;
+        }
+
+        canvasManager.GameEndScores(totalScore, totalKills, isHighscore, rank);
         player.EndGame();
         gameActive = false;
-        spawners.ResetSpawningManager();
         timeManager.UpdateGameStatus(false);
+        spawners.DisableSpawning();
+    }
+
+    //Results are shown
+    public void EndScreen()
+    {
+        spawners.ResetSpawningManager();
     }
 
     public void GameStart()
@@ -123,8 +148,15 @@ public class GameManager : MonoBehaviour
     public void UpdateKillCount(int enemyScore)
     {
         totalScore += enemyScore;
-
         totalKills++;
+
+        if (!predicationActivated && totalScore > leaderboardmanager.GetPredictedHighscore())
+        {
+            canvasManager.UpdateGameScoreColor("Blue");
+            predicationActivated = true;
+        }
+
+        canvasManager.UpdateGameScore(totalScore);
     }
 
     public void UpdateLeftGameColor(float time)
