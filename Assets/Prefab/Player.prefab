@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 994873321054509158}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.000000014901159, w: 1}
-  m_LocalPosition: {x: 0.199, y: -0.097, z: 0}
+  m_LocalPosition: {x: -0.234, y: 1, z: 0.648}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2fd770889e806409a60c9c525e39f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerWeapon: {fileID: 0}
   bulletPrefab: {fileID: 4651239424693208098, guid: a4cf4bcf4c90ba847809f3d271c51510,
     type: 3}
   canvasManager: {fileID: 0}
@@ -782,6 +783,7 @@ MonoBehaviour:
   bulletDuration: 0
   bulletDamage: 0
   maxAmmo: 0
+  maxClip: 0
   bulletColor: {r: 0, g: 0, b: 0, a: 0}
   weaponName: 
   canShoot: 0
@@ -802,6 +804,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3ff6cd8c80c2c4c898ad21093d423c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager:
+    gameCamera: {fileID: 0}
+    projectilePool: {fileID: 0}
+    particlePool: {fileID: 0}
+    player: {fileID: 0}
+    defaultWeapon: {fileID: 0}
+    spawnPoint: {fileID: 0}
   weaponParent: {fileID: 0}
   bulletSpawnTag: BulletSpawn
   bulletSpawn: {fileID: 0}
