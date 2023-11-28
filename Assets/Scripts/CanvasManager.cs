@@ -45,7 +45,7 @@ public class CanvasManager : MonoBehaviour
 
     public TMPro.TMP_Text currentAmmo;
     public TMPro.TMP_Text maxAmmo;
-    public Sprite weapon2DModel;
+    public Image weapon2DModel;
     public TMPro.TMP_Text weaponName;
     public Slider reloadSlider;
 
@@ -310,7 +310,7 @@ public class CanvasManager : MonoBehaviour
         maxAmmo.text = "/" + ammo.ToString();
         reloadSlider.maxValue = reloadDelay;
         reloadSlider.value = reloadDelay;
-        weapon2DModel = gunModel;
+        weapon2DModel.sprite = gunModel;
     }
 
     public void UpdateWeaponAmmo(int ammo)

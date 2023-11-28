@@ -16,10 +16,11 @@ MonoBehaviour:
   gunModel: {fileID: 21300000, guid: a57399dbe7f378c4cb8551b27461aca7, type: 3}
   gun: {fileID: 1665196681572785607, guid: 196f6b24fe3f11e4d930a23a0d4ef2a5, type: 3}
   reloadDelay: 1
+  firingDelay: 0.25
   ammo: 48
   clip: 6
   bullet: {fileID: 4651239424693208098, guid: a4cf4bcf4c90ba847809f3d271c51510, type: 3}
-  bulletColor: {r: 1, g: 0.89088523, b: 0, a: 0}
-  bulletSpeed: 65
+  bulletColor: {r: 1, g: 0.89088523, b: 0, a: 1}
+  bulletSpeed: 55
   bulletDamage: 25
   bulletDuration: 4

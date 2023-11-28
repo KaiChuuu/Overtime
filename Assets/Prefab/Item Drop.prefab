@@ -68,8 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fa93523192efb4ca225968046493f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: {fileID: 11400000, guid: 2ab7c9e4a0846154190c2c242401ac48, type: 2}
-  weapon: {fileID: 1523157133496174005}
+  weaponType: {fileID: 0}
+  weapon: {fileID: 0}
+  available: 1
+  rechargeTime: 5
   rotationSpeed: 1
 --- !u!1 &1469962609252119781
 GameObject:
@@ -443,12 +445,6 @@ PrefabInstance:
 --- !u!4 &1258169486287800433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1390849926954602499, guid: 196f6b24fe3f11e4d930a23a0d4ef2a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 160054640261093490}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1523157133496174005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1665196681572785607, guid: 196f6b24fe3f11e4d930a23a0d4ef2a5,
     type: 3}
   m_PrefabInstance: {fileID: 160054640261093490}
   m_PrefabAsset: {fileID: 0}
