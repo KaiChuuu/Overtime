@@ -21,12 +21,13 @@ public class PlayerWeapon : MonoBehaviour
         }
 
         //Noise effect
-
+ 
         currentWeapon = Instantiate(weapon, weaponParent.transform);
+ 
         bulletSpawn = currentWeapon.GetComponentInChildren<BoxCollider>();
-        bulletSpawn.center = new Vector3(bulletSpawn.center.x + weaponParent.transform.position.x,
-                                        bulletSpawn.center.y + weaponParent.transform.position.y,
-                                        bulletSpawn.center.z + weaponParent.transform.position.z);
+        bulletSpawn.center = new Vector3(bulletSpawn.center.x + weaponParent.transform.localPosition.x,
+                                        1,
+                                        bulletSpawn.center.z + weaponParent.transform.localPosition.z);
         weaponAudio = currentWeapon.GetComponent<AudioSource>();
         if (!bulletSpawn)
         {

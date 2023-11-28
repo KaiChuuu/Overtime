@@ -55,9 +55,12 @@ public class PlayerManager
         shoot.bulletDamage = weaponType.bulletDamage;
         shoot.bulletColor = weaponType.bulletColor;
         shoot.reloadDelay = weaponType.reloadDelay;
+        shoot.firingDelay = weaponType.firingDelay;
         shoot.maxAmmo = weaponType.ammo;
         shoot.maxClip = weaponType.clip;
         shoot.ammo = weaponType.clip;
+        shoot.weaponName = weaponType.weaponName;
+        shoot.ResetReloadBar();
 
         //Weapon
         weapon.EquipWeapon(weaponType.gun);

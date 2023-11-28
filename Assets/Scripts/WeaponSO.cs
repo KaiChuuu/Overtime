@@ -8,6 +8,7 @@ public class WeaponSO : ScriptableObject
     public Sprite gunModel;
     public GameObject gun;    
     public float reloadDelay;
+    public float firingDelay;
     public int ammo;
     public int clip;
 
