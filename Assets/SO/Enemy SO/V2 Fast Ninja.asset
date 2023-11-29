@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc10ae088ecce94baefa58646afd815, type: 3}
+  m_Name: V2 Fast Ninja
+  m_EditorClassIdentifier: 
+  enemyName: V2 Fast Ninja
+  enemy: {fileID: 8401773170638852068, guid: 838e84acea60f694a8084a4ff692ccd4, type: 3}
+  scorePoints: 100
+  speed: 13
+  slowSpeed: 8
+  damage: 40
+  health: 90
+  speedScale: 0
+  damageScale: 0
+  healthScale: 0
+  attackingRange: 4
+  bucketAmount: 4
+  enemyDifficulty: 8
+  difficultyCap: 8
