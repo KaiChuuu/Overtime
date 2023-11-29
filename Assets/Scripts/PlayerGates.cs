@@ -9,14 +9,12 @@ public class PlayerGates : MonoBehaviour
     public AudioClip gateDisable;
     public AudioClip gateActive;
 
-    private NavMeshObstacle obstacle;
-    private BoxCollider colldier;
+    private BoxCollider boxCollider;
 
     void Awake()
     {
         gateNoise = GetComponent<AudioSource>();
-        obstacle = GetComponent<NavMeshObstacle>();
-        colldier = GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -60,8 +58,7 @@ public class PlayerGates : MonoBehaviour
         gateNoise.clip = gateDisable;
         gateNoise.Play();
 
-        obstacle.enabled = false;
-        colldier.enabled = false;
+        boxCollider.enabled = false;
     }
 
     public void ReactivateGate()
@@ -75,7 +72,6 @@ public class PlayerGates : MonoBehaviour
         gateNoise.loop = true;
         gateNoise.Play();
 
-        obstacle.enabled = true;
-        colldier.enabled = true;
+        boxCollider.enabled = true;
     }
 }

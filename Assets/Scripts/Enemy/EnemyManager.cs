@@ -33,11 +33,11 @@ public class EnemyManager
     public void ResetGame()
     {
         gameDifficulty = 0;
-        nextEnemyType = 0;
+        nextEnemyType = 1;
         ResetBucket();
     }
 
-    public void ResetBucket()
+    private void ResetBucket()
     {
         enemyBucket.Clear();
         for(int i=0; i<enemyTypes[0].bucketAmount; i++)
@@ -71,7 +71,7 @@ public class EnemyManager
     public EnemySO GetEnemy()
     {
         //Randomizer
-        int bucketChoice = UnityEngine.Random.Range(0, enemyBucket.Count);
+        int bucketChoice = UnityEngine.Random.Range(0, enemyBucket.Count-1);
 
         return enemyTypes[enemyBucket[bucketChoice]];
     }

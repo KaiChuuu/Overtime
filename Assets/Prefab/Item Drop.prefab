@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8498231706752891183}
+  - component: {fileID: 2403958980639876848}
   - component: {fileID: 1577051968814967035}
   - component: {fileID: 7148083692996771431}
   m_Layer: 0
@@ -35,6 +36,25 @@ Transform:
   - {fileID: 5322550422453021134}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2403958980639876848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77956360196402944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!65 &1577051968814967035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69,7 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: {fileID: 0}
-  weapon: {fileID: 0}
+  itemModel: {fileID: 0}
+  isHealth: 0
+  healthGain: 100
   available: 1
   rechargeTime: 5
   rotationSpeed: 1
