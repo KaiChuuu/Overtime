@@ -82,6 +82,7 @@ public class PlayerManager
         weapon.DisableGun();
 
         movement.SetPosition(spawnPoint.position);
+        movement.ResetPhysics();
 
         health.Setup();
 

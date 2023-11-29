@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
     [HideInInspector] public PlayerShoot shoot;
     [HideInInspector] public CanvasManager canvasManager;
 
+    public GameObject ragdollPlayerPrefab;
+
     public GameObject playerModel;
     public float currentHealth;
     private bool dead;
@@ -29,11 +31,13 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
     {
         dead = true;
 
-        //Death animation
-
         canvasManager.GameEnd();
 
         playerModel.SetActive(false);
+
+        //Death animation
+        GameObject ragdoll = Instantiate(ragdollPlayerPrefab, this.transform.position, transform.rotation, this.transform);
+        Destroy(ragdoll, 4f);
     }
 
     public void TakeDamage(float amount)
@@ -46,5 +50,18 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
         {
             OnDeath();
         }
+    }
+
+    public void GainHealth(float amount)
+    {
+        if (currentHealth + amount >= 100f)
+        {
+            currentHealth = 100f;
+        }
+        else
+        {
+            currentHealth += amount;
+        }
+        canvasManager.UpdatePlayerHealth(currentHealth);
     }
 }

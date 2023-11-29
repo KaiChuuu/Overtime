@@ -56,4 +56,14 @@ public class PlayerMovement : MonoBehaviour
     {
         gameObject.transform.position = position;
     }
+
+    public void ResetPhysics()
+    {
+        playerBody.drag = 2f;
+    }
+
+    public void UpdatePlayerPhysics(int drag)
+    {
+        playerBody.drag = drag;
+    }
 }

@@ -10,8 +10,9 @@ public class EnvironmentManager : MonoBehaviour
     public Color redLights;
 
     public PlayerGates[] stage4Gates;
-    public Material[] stage4LeftWalls;
-    public Material[] stage4RightWalls;
+    public Material[] stage4Walls;
+    public GameObject stage4Lights;
+    public Color whiteLights;
 
     public PlayerGates[] stage3Gates;
     public Material[] stage3Walls;
@@ -35,6 +36,8 @@ public class EnvironmentManager : MonoBehaviour
     public MaterialColorSO freeze;
     public MaterialColorSO defaultColor;
     public MaterialColorSO inactiveColor;
+
+    public ParticleSystem[] stageFogs;
 
     private int clockTimes = 60; //Assuming clocks start 60
 
@@ -128,6 +131,7 @@ public class EnvironmentManager : MonoBehaviour
                 {
                     gates.DeactivateGate();
                 }
+                stageFogs[0].Stop();
                 StartCoroutine(WarmupStage2Walls());
                 StartCoroutine(WarmupStage2Lights());
                 //Remove fog
@@ -137,6 +141,7 @@ public class EnvironmentManager : MonoBehaviour
                 {
                     gates.DeactivateGate();
                 }
+                stageFogs[1].Stop();
                 StartCoroutine(WarmupStage3Walls());
                 StartCoroutine(WarmupStage3Lights());
                 break;
@@ -145,15 +150,56 @@ public class EnvironmentManager : MonoBehaviour
                 {
                     gates.DeactivateGate();
                 }
+                stageFogs[2].Stop();
+                StartCoroutine(WarmupStage4Walls());
+                StartCoroutine(WarmupStage4Lights());
                 break;
             case 8:
                 foreach (PlayerGates gates in stage5Gates)
                 {
                     gates.DeactivateGate();
                 }
+                stageFogs[3].Stop();
                 StartCoroutine(WarmupStage5Walls());
                 StartCoroutine(WarmupStage5Lights());
                 break;
+        }
+    }
+
+    IEnumerator WarmupStage4Lights()
+    {
+        float emission = 0f;
+        float intensity = 0f;
+        for (int i = 0; i < 50; i++)
+        {
+            emission += 0.01f;
+            intensity += 0.07f;
+            foreach (Transform child in stage4Lights.transform)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", whiteLights * emission);
+
+                child.GetComponentInChildren<Light>().intensity = intensity;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator WarmupStage4Walls()
+    {
+        //Wall wake up glow
+        float emissionValue = 0f;
+        for (int i = 0; i < 50; i++)
+        {
+            emissionValue += 0.01f;
+            foreach (Material walls in stage4Walls)
+            {
+                walls.SetColor("_EmissionColor",
+                    Color.Lerp(inactiveColor.emissionColor * inactiveColor.emissionStrength,
+                        defaultColor.emissionColor * defaultColor.emissionStrength, emissionValue));
+            }
+
+            yield return new WaitForSeconds(0.1f); //Tweak this to modify warmup timing, current duration is 10 seconds (5 sec is 0.05)
         }
     }
 
@@ -183,9 +229,9 @@ public class EnvironmentManager : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             emissionValue += 0.01f;
-            foreach (Material left in stage3Walls)
+            foreach (Material walls in stage3Walls)
             {
-                left.SetColor("_EmissionColor",
+                walls.SetColor("_EmissionColor",
                     Color.Lerp(inactiveColor.emissionColor * inactiveColor.emissionStrength,
                         freeze.emissionColor * freeze.emissionStrength, emissionValue));
             }
@@ -220,9 +266,9 @@ public class EnvironmentManager : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             emissionValue += 0.01f;
-            foreach (Material left in stage5Walls)
+            foreach (Material walls in stage5Walls)
             {
-                left.SetColor("_EmissionColor",
+                walls.SetColor("_EmissionColor",
                     Color.Lerp(inactiveColor.emissionColor * inactiveColor.emissionStrength,
                         lowHP.emissionColor, emissionValue));
             }
@@ -300,17 +346,26 @@ public class EnvironmentManager : MonoBehaviour
         stage2Enabled = false;
 
         //STAGE 3
-        foreach (Material left in stage3Walls)
+        foreach (Material walls in stage3Walls)
         {
-            left.SetColor("_EmissionColor", inactiveColor.emissionColor * inactiveColor.emissionStrength);
+            walls.SetColor("_EmissionColor", inactiveColor.emissionColor * inactiveColor.emissionStrength);
         }
 
         //STAGE 4
+        foreach (Material walls in stage4Walls)
+        {
+            walls.SetColor("_EmissionColor", inactiveColor.emissionColor * inactiveColor.emissionStrength);
+        }
 
         //STAGE 5
-        foreach (Material left in stage5Walls)
+        foreach (Material walls in stage5Walls)
         {
-            left.SetColor("_EmissionColor", inactiveColor.emissionColor * inactiveColor.emissionStrength);
+            walls.SetColor("_EmissionColor", inactiveColor.emissionColor * inactiveColor.emissionStrength);
+        }
+
+        foreach(ParticleSystem fog in stageFogs)
+        {
+            fog.Play();
         }
 
         ResetStageLights();
@@ -336,25 +391,31 @@ public class EnvironmentManager : MonoBehaviour
             child.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", blueLights * 0);
             child.GetComponentInChildren<Light>().intensity = 0;
         }
+
+        foreach (Transform child in stage4Lights.transform)
+        {
+            child.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", whiteLights * 0);
+            child.GetComponentInChildren<Light>().intensity = 0;
+        }
     }
 
     void ReactivateStageGates()
     {
-        foreach (PlayerGates gates in stage2Gates)
+        foreach (PlayerGates gate in stage2Gates)
         {
-            gates.ReactivateGate();
+            gate.ReactivateGate();
         }
-        foreach (PlayerGates gates in stage3Gates)
+        foreach (PlayerGates gate in stage3Gates)
         {
-            gates.ReactivateGate();
+            gate.ReactivateGate();
         }
-        foreach (PlayerGates gates in stage4Gates)
+        foreach (PlayerGates gate in stage4Gates)
         {
-            gates.ReactivateGate();
+            gate.ReactivateGate();
         }
-        foreach (PlayerGates gates in stage5Gates)
+        foreach (PlayerGates gate in stage5Gates)
         {
-            gates.ReactivateGate();
+            gate.ReactivateGate();
         }
     }
 }

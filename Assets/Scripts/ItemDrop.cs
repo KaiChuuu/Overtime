@@ -5,7 +5,10 @@ using UnityEngine;
 public class ItemDrop : MonoBehaviour
 {
     public WeaponSO weaponType;
-    public GameObject weapon;
+    public GameObject itemModel;
+
+    public bool isHealth = false;
+    public float healthGain = 100f;
 
     public bool available = true;
     public float rechargeTime = 5f;
@@ -16,7 +19,7 @@ public class ItemDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        weapon.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+        itemModel.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
         if (!available)
         {
             time += Time.deltaTime;
@@ -24,7 +27,7 @@ public class ItemDrop : MonoBehaviour
             {
                 time = 0f;
                 available = true;
-                weapon.SetActive(true);
+                itemModel.SetActive(true);
                 //Animation 
             }
         }
@@ -34,16 +37,40 @@ public class ItemDrop : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            
             if (available)
             {
-                PlayerWeapon targetWeapon = collider.gameObject.GetComponentInChildren<PlayerWeapon>();
-                if (targetWeapon != null)
+                if (isHealth)
                 {
-                    targetWeapon.AttachNewGun(weaponType);
-                    available = false;
-                    weapon.SetActive(false);
+                    GiveHealth(collider);
+                }
+                else
+                {
+                    GiveWeapon(collider);
                 }
             }
+        }
+    }
+
+    void GiveHealth(Collider collider)
+    {
+        PlayerHealth targetHealth = collider.gameObject.GetComponentInChildren<PlayerHealth>();
+        if (targetHealth != null)
+        {
+            targetHealth.GainHealth(healthGain);
+            available = false;
+            itemModel.SetActive(false);
+        }
+    }
+
+    void GiveWeapon(Collider collider)
+    {
+        PlayerWeapon targetWeapon = collider.gameObject.GetComponentInChildren<PlayerWeapon>();
+        if (targetWeapon != null)
+        {
+            targetWeapon.AttachNewGun(weaponType);
+            available = false;
+            itemModel.SetActive(false);
         }
     }
 }

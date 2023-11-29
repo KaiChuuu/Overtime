@@ -25,9 +25,9 @@ public class PlayerWeapon : MonoBehaviour
         currentWeapon = Instantiate(weapon, weaponParent.transform);
  
         bulletSpawn = currentWeapon.GetComponentInChildren<BoxCollider>();
-        bulletSpawn.center = new Vector3(bulletSpawn.center.x + weaponParent.transform.localPosition.x,
-                                        1,
-                                        bulletSpawn.center.z + weaponParent.transform.localPosition.z);
+        bulletSpawn.center = new Vector3(weaponParent.transform.localPosition.x,
+                                        weaponParent.transform.localPosition.y,
+                                        bulletSpawn.center.z);
         weaponAudio = currentWeapon.GetComponent<AudioSource>();
         if (!bulletSpawn)
         {
