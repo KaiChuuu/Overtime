@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Fast Ninja
   m_EditorClassIdentifier: 
   enemyName: Fast Ninja
-  enemy: {fileID: 0}
+  enemy: {fileID: 8401773170638852068, guid: 5e03c25acaee36e4f9d95815bf0e3f06, type: 3}
   scorePoints: 20
   speed: 7.5
-  slowSpeed: 2
+  slowSpeed: 4
   damage: 10
   health: 30
   speedScale: 0.5
   damageScale: 2
   healthScale: 6
-  attackingRange: 3
+  attackingRange: 4
   bucketAmount: 2
-  enemyDifficulty: 2
-  difficultyCap: 5
+  enemyDifficulty: 3
+  difficultyCap: 7
