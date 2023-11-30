@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody.drag = 2f;
     }
 
-    public void UpdatePlayerPhysics(int drag)
+    public void UpdatePlayerPhysics(float drag)
     {
         playerBody.drag = drag;
     }

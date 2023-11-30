@@ -16,6 +16,9 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
     public float currentHealth;
     private bool dead;
 
+    public AudioSource takeDamageSource;
+    public AudioClip damageAudio;
+
     public void Setup()
     {
         currentHealth = startingHealth;
@@ -49,6 +52,10 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
         if (currentHealth <= 0f && !dead)
         {
             OnDeath();
+        }
+        else
+        {
+            takeDamageSource.PlayOneShot(damageAudio, 0.05f);
         }
     }
 

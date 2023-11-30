@@ -1,9 +1,13 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
     [HideInInspector] public PlayerWeapon playerWeapon;
+
+    public AudioSource extraWeaponSounds;
+    public AudioSource reloadSound;
 
     public GameObject bulletPrefab;
     [HideInInspector] public CanvasManager canvasManager;
@@ -61,9 +65,14 @@ public class PlayerShoot : MonoBehaviour
         }
         else if (weaponName == "Endbringer")
         {
-            if (isShooting)
+            if (isShooting && ammo > 0)
             {
-                windupTimer += Time.deltaTime;
+                if(windupTimer < windupTime)
+                {
+                    windupTimer += Time.deltaTime;
+                    extraWeaponSounds.pitch += Time.deltaTime * 0.2f;
+                    extraWeaponSounds.volume += Time.deltaTime * 0.05f;
+                }
 
                 if (windupTimer > windupTime)
                 {
@@ -75,6 +84,8 @@ public class PlayerShoot : MonoBehaviour
                 if (windupTimer > 0f)
                 {
                     windupTimer -= Time.deltaTime;
+                    extraWeaponSounds.pitch -= Time.deltaTime * 0.2f;
+                    extraWeaponSounds.volume -= Time.deltaTime * 0.05f;
                 }
             }
         }
@@ -114,14 +125,18 @@ public class PlayerShoot : MonoBehaviour
 
     void ShootBullet(InputAction.CallbackContext context)
     {
-        if (context.performed && isShooting)
+        if (!context.ReadValueAsButton() && isShooting)
         {
             isShooting = false;
             return;
         }
 
-        if (context.performed && canShoot)
+        if (context.ReadValueAsButton() && canShoot)
         {
+            if (weaponName == "Endbringer")
+            {
+                extraWeaponSounds.Play();
+            }
             isShooting = true;
         }
     }
@@ -138,6 +153,7 @@ public class PlayerShoot : MonoBehaviour
 
         if (ammo == 0 && maxAmmo > 0)
         {
+            StartCoroutine(ReloadAudio());
             canvasManager.EnableReloadBar();
         }
 
@@ -192,6 +208,36 @@ public class PlayerShoot : MonoBehaviour
         canvasManager.UpdateReloadBar(1);
         timer = 0f;
         canFireNext = true;
+    }
+
+    public void ResetExtraAudio()
+    {
+        if(weaponName == "Endbringer")
+        {
+            StartCoroutine(LowerAudio());
+        }
+    }
+
+
+    IEnumerator LowerAudio()
+    {
+        for(int i=50; i>=0; i--)
+        {
+            extraWeaponSounds.volume -= 0.0011f;
+            yield return new WaitForSeconds(0.01f);
+        }
         windupTimer = 0f;
+        extraWeaponSounds.pitch = 0.22f;
+        extraWeaponSounds.Stop();
+    }
+
+    IEnumerator ReloadAudio()
+    {
+        float spacing = reloadDelay / 3;
+        for(int i=0; i<3; i++)
+        {
+            reloadSound.Play();
+            yield return new WaitForSeconds(spacing);
+        }
     }
 }

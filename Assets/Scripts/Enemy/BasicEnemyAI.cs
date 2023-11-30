@@ -17,9 +17,6 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
     private NavMeshAgent agent;
     private Animator animator;
 
-    private float time = 0f;
-    public float survivalLimit = 60f; //failsafe for looping the same enemies
-
     private bool enableAgent = false;
 
     // Start is called before the first frame update
@@ -32,13 +29,6 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time > survivalLimit)
-        {
-            //Upgrade enemy
-        }
-
-
         if (enableAgent)
         {
             UpdatePosition();
@@ -47,6 +37,7 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
 
     public void SetBaseStats(float speed, float slow, float damage, float health, float attackingRange)
     {
+        basicEnemyHealth.enemyAI = this;
         basicEnemyHealth.enemyHealth = health;
         basicEnemyAttack.enemyDamage = damage;
         basicEnemyAttack.attackRange = attackingRange;
@@ -86,5 +77,10 @@ public class BasicEnemyAI : MonoBehaviour, EnemyBaseStats
     public void SetDefaultSpeed()
     {
         agent.speed = baseSpeed;
+    }
+
+    public void DisableAgent()
+    {
+        enableAgent = false;
     }
 }

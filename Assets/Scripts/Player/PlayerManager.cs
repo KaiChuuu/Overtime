@@ -47,6 +47,7 @@ public class PlayerManager
     public void EquipWeapon(WeaponSO weaponType)
     {
         //Bullet
+        shoot.ResetExtraAudio();
         shoot.projectilePool = projectilePool;
         shoot.particlePool = particlePool;
         shoot.bulletPrefab = weaponType.bullet;
