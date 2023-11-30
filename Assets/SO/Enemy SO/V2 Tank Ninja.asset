@@ -18,7 +18,7 @@ MonoBehaviour:
   speed: 4
   slowSpeed: 3
   damage: 35
-  health: 10
+  health: 170
   speedScale: 0.25
   damageScale: 2.5
   healthScale: 10

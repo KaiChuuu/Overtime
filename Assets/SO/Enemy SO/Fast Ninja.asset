@@ -25,4 +25,4 @@ MonoBehaviour:
   attackingRange: 4
   bucketAmount: 2
   enemyDifficulty: 3
-  difficultyCap: 7
+  difficultyCap: 8

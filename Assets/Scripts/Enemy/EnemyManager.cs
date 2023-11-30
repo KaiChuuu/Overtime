@@ -84,18 +84,18 @@ public class EnemyManager
         float damage = enemySO.damage;
         float health = enemySO.health;
 
-        if (enemySO.enemyDifficulty + enemySO.difficultyCap > gameDifficulty)
+        if (enemySO.difficultyCap > gameDifficulty)
         {
-            speed += gameDifficulty * enemySO.speedScale;
-            damage += gameDifficulty * enemySO.damageScale;
-            health += gameDifficulty * enemySO.healthScale;
+            speed += (gameDifficulty - enemySO.enemyDifficulty) * enemySO.speedScale;
+            damage += (gameDifficulty - enemySO.enemyDifficulty) * enemySO.damageScale;
+            health += (gameDifficulty - enemySO.enemyDifficulty) * enemySO.healthScale;
         }
         else
         {
             //Game difficulty is past max
-            speed += enemySO.difficultyCap * enemySO.speedScale;
-            damage += enemySO.difficultyCap * enemySO.damageScale;
-            health += enemySO.difficultyCap * enemySO.healthScale;
+            speed += (enemySO.difficultyCap - enemySO.enemyDifficulty) * enemySO.speedScale;
+            damage += (enemySO.difficultyCap - enemySO.enemyDifficulty) * enemySO.damageScale;
+            health += (enemySO.difficultyCap - enemySO.enemyDifficulty) * enemySO.healthScale;
         }
 
         float slowdownSpeed = gameDifficulty * enemySO.speedScale + enemySO.slowSpeed;

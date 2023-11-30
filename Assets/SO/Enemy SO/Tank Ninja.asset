@@ -18,11 +18,11 @@ MonoBehaviour:
   speed: 3
   slowSpeed: 1
   damage: 15
-  health: 50
+  health: 100
   speedScale: 0.1
   damageScale: 2
   healthScale: 10
   attackingRange: 4
   bucketAmount: 2
   enemyDifficulty: 2
-  difficultyCap: 6
+  difficultyCap: 7

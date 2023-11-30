@@ -16,7 +16,7 @@ public class StageEffects : MonoBehaviour
                 switch (stage)
                 {
                     case 2:                    
-                        targetMovement.UpdatePlayerPhysics(3);       
+                        targetMovement.UpdatePlayerPhysics(3.5f);       
                         break;
                     case 3:         
                         targetMovement.UpdatePlayerPhysics(1); 
@@ -33,7 +33,7 @@ public class StageEffects : MonoBehaviour
             PlayerMovement targetMovement = collider.gameObject.GetComponentInChildren<PlayerMovement>();
             if (targetMovement != null)
             {
-                targetMovement.UpdatePlayerPhysics(2);
+                targetMovement.UpdatePlayerPhysics(2.5f);
             }
         }
     }

@@ -39,6 +39,8 @@ public class EnvironmentManager : MonoBehaviour
 
     public ParticleSystem[] stageFogs;
 
+    public AudioSource stageOpenSFX;
+
     private int clockTimes = 60; //Assuming clocks start 60
 
     void Start()
@@ -134,7 +136,7 @@ public class EnvironmentManager : MonoBehaviour
                 stageFogs[0].Stop();
                 StartCoroutine(WarmupStage2Walls());
                 StartCoroutine(WarmupStage2Lights());
-                //Remove fog
+                stageOpenSFX.Play();
                 break;
             case 4:
                 foreach(PlayerGates gates in stage3Gates)
@@ -144,6 +146,7 @@ public class EnvironmentManager : MonoBehaviour
                 stageFogs[1].Stop();
                 StartCoroutine(WarmupStage3Walls());
                 StartCoroutine(WarmupStage3Lights());
+                stageOpenSFX.Play();
                 break;
             case 6:
                 foreach (PlayerGates gates in stage4Gates)
@@ -153,6 +156,7 @@ public class EnvironmentManager : MonoBehaviour
                 stageFogs[2].Stop();
                 StartCoroutine(WarmupStage4Walls());
                 StartCoroutine(WarmupStage4Lights());
+                stageOpenSFX.Play();
                 break;
             case 8:
                 foreach (PlayerGates gates in stage5Gates)
@@ -162,6 +166,7 @@ public class EnvironmentManager : MonoBehaviour
                 stageFogs[3].Stop();
                 StartCoroutine(WarmupStage5Walls());
                 StartCoroutine(WarmupStage5Lights());
+                stageOpenSFX.Play();
                 break;
         }
     }
