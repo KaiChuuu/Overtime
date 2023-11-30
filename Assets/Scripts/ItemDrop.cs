@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    private AudioSource pickup; 
+    public AudioSource pickupWeapon;
+    public AudioSource pickupHealth;
 
     public WeaponSO weaponType;
     public GameObject itemModel;
@@ -17,11 +18,6 @@ public class ItemDrop : MonoBehaviour
     private float time = 0f;
 
     public float rotationSpeed = 1f;
-
-    void Awake()
-    {
-        pickup = GetComponent<AudioSource>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -66,7 +62,7 @@ public class ItemDrop : MonoBehaviour
             targetHealth.GainHealth(healthGain);
             available = false;
             itemModel.SetActive(false);
-            pickup.Play();
+            pickupHealth.Play();
         }
     }
 
@@ -78,7 +74,7 @@ public class ItemDrop : MonoBehaviour
             targetWeapon.AttachNewGun(weaponType);
             available = false;
             itemModel.SetActive(false);
-            pickup.Play();
+            pickupWeapon.Play();
         }
     }
 }

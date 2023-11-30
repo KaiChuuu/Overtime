@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class GameTimeManager : MonoBehaviour
 {
+    public AudioSource alertAudio;
+    private bool alarmPlaying;
+
+    public AudioSource freezeAudio;
+
     public Transform mapDivider;
 
     private CanvasManager canvasManager;
@@ -28,6 +33,8 @@ public class GameTimeManager : MonoBehaviour
     public float freezeDuration = 5f; //Also the time gained within the duration
     private bool freezeTime = false;
     private float timer = 0f;
+    private float freezeCooldown = 2f;
+    private bool canFreeze = true;
 
     public void Setup(ref CanvasManager canvas, ref GameObject gamePlayer)
     {
@@ -56,6 +63,7 @@ public class GameTimeManager : MonoBehaviour
                     if (leftTimer > 1f)
                     {
                         leftTimer -= Time.deltaTime;
+                        AlarmAudio(leftTimer);
                         UpdateSideTimerUI(leftTimer, "left", true);
                     }
                     else
@@ -85,6 +93,7 @@ public class GameTimeManager : MonoBehaviour
                     if (rightTimer > 1f)
                     {
                         rightTimer -= Time.deltaTime;
+                        AlarmAudio(rightTimer);
                         UpdateSideTimerUI(rightTimer, "right", true);
                     }
                     else
@@ -110,10 +119,12 @@ public class GameTimeManager : MonoBehaviour
                 }
 
                 //Check if times are equal
-                if (Mathf.FloorToInt(leftTimer) == Mathf.FloorToInt(rightTimer) && !gameIsEnding)
+                if (canFreeze && Mathf.FloorToInt(leftTimer) == Mathf.FloorToInt(rightTimer) && !gameIsEnding)
                 {
+                    freezeAudio.Play();
                     UpdateFrozenGame();
                     freezeTime = true;
+                    canFreeze = false;
                 }
             }
             else
@@ -135,12 +146,42 @@ public class GameTimeManager : MonoBehaviour
                     UpdateSideTimerUI(leftTimer, "left", true);
 
                     canvasManager.Unfreeze();
+
+                    StartCoroutine(FreezeCooldown());
                 }
       
             }
 
             UpdateGameTimer(gameTime);
         }
+    }
+
+    IEnumerator FreezeCooldown()
+    {
+        yield return new WaitForSeconds(freezeCooldown);
+        canFreeze = true;
+    }
+
+    void AlarmAudio(float currentTime)
+    {
+        int estimatedTime = Mathf.FloorToInt(currentTime);
+        if (estimatedTime == 10 && !alarmPlaying)
+        {
+            alarmPlaying = true;
+            StartCoroutine(PlayAlarm());
+        }
+    }
+
+    IEnumerator PlayAlarm()
+    {
+        alertAudio.Play();
+        yield return new WaitForSeconds(1f);
+        alertAudio.Play();
+        yield return new WaitForSeconds(1f);
+        alertAudio.Play();
+        yield return new WaitForSeconds(1f);
+
+        alarmPlaying = false;
     }
 
     void IncreaseRightTimer(bool display)
