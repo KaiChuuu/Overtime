@@ -174,7 +174,7 @@ public class PlayerShoot : MonoBehaviour
             case "Scattergun":
                 for (int i = 0; i < 5; i++)
                 {
-                    int spread = Random.Range(-3, 3);
+                    float spread = Random.Range(-0.1f, 0.1f);
                     GameObject shell = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center), transform.rotation * Quaternion.Euler(0, spread, 0), projectilePool);
                     shell.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                     Bullet shellComp = shell.GetComponent<Bullet>();
@@ -189,7 +189,7 @@ public class PlayerShoot : MonoBehaviour
                 UpdateBullet(ref bullet2Comp);
                 break;
             case "Endbringer":
-                int spread3 = Random.Range(-2, 2);
+                float spread3 = Random.Range(-2f, 2f);
                 GameObject lead = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center), transform.rotation * Quaternion.Euler(0, spread3, 0), projectilePool);
                 lead.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                 Bullet leadComp = lead.GetComponent<Bullet>();
