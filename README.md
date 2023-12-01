@@ -2,8 +2,8 @@
 [(2023 Game Jam Theme is SCALE)](https://itch.io/jam/game-off-2023)
 
 Hello fellow game jammers!
-I wanted to thank everyone who have or will play my game Overtime!
-I hope you enjoy the game and have fun! 
+I wanted to thank everyone who will or have played my game Overtime!
+I hope you enjoy the game and have fun!
 Thanks,
 RedDogClifford
 
