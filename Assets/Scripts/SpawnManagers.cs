@@ -1,7 +1,6 @@
-using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SpawnManagers : MonoBehaviour
 {
@@ -59,7 +58,7 @@ public class SpawnManagers : MonoBehaviour
     Vector3 RandomSpawnLocation()
     {
         //Select random spawner
-        int spawner = UnityEngine.Random.Range(0, activeSpawners);
+        int spawner = Random.Range(0, activeSpawners+1);
 
         //Select random location within spawner
         Vector3 spawnRange = enemySpawners[spawner].size/2;
