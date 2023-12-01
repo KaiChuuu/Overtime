@@ -39,9 +39,12 @@ public class PlayerShoot : MonoBehaviour
     private float windupTime = 1f;
     private float windupTimer = 0f;
 
+    private Rigidbody playerRigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerRigidbody = transform.parent.GetComponent<Rigidbody>();
         canShoot = false;
         OnEnable();
     }
@@ -164,14 +167,16 @@ public class PlayerShoot : MonoBehaviour
             case "Lazer Blaster":
                 //Shoot bullet
                 GameObject bullet = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center), transform.rotation, projectilePool);
+                bullet.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                 Bullet bulletComp = bullet.GetComponent<Bullet>();
                 UpdateBullet(ref bulletComp);
                 break;
             case "Scattergun":
                 for (int i = 0; i < 5; i++)
                 {
-                    int spread = Random.Range(-5, 5);
+                    int spread = Random.Range(-3, 3);
                     GameObject shell = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center), transform.rotation * Quaternion.Euler(0, spread, 0), projectilePool);
+                    shell.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                     Bullet shellComp = shell.GetComponent<Bullet>();
                     UpdateBullet(ref shellComp);
                 }
@@ -179,12 +184,14 @@ public class PlayerShoot : MonoBehaviour
             case "Discharger":
                 float spread2 = Random.Range(-0.1f, 0.1f);
                 GameObject bullet2 = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center) + new Vector3(spread2, 0, 0), transform.rotation, projectilePool);
+                bullet2.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                 Bullet bullet2Comp = bullet2.GetComponent<Bullet>();
                 UpdateBullet(ref bullet2Comp);
                 break;
             case "Endbringer":
                 int spread3 = Random.Range(-2, 2);
                 GameObject lead = Instantiate(bulletPrefab, transform.TransformPoint(bulletSpawnLocation.center), transform.rotation * Quaternion.Euler(0, spread3, 0), projectilePool);
+                lead.GetComponent<Rigidbody>().velocity = playerRigidbody.velocity;
                 Bullet leadComp = lead.GetComponent<Bullet>();
                 UpdateBullet(ref leadComp);
                 break;
