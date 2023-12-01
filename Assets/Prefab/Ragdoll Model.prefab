@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6348516809154002555}
   - component: {fileID: 3693688729729717786}
   - component: {fileID: 3902249356106769190}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2338864355075877298}
   - component: {fileID: 4568468722717659844}
   - component: {fileID: 2181582265343490260}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 8480306744640532717}
   - component: {fileID: 9077119605137200447}
   - component: {fileID: 5072086126425635324}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 4758732577621150581}
   - component: {fileID: 7916980969796717337}
   - component: {fileID: 3813223738467995552}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 4687707359018776521}
   - component: {fileID: 6324051707462177655}
   - component: {fileID: 7388681923269182730}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 4049831866321348319}
   - component: {fileID: 6177123805579139821}
   - component: {fileID: 7598870983844890347}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 2085921928899288120}
   - component: {fileID: 4420845309863519210}
   - component: {fileID: 3401195722617026333}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   - component: {fileID: 1160101687318671804}
   - component: {fileID: 5975440981170341674}
   - component: {fileID: 5029747802334001868}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Body (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 7524084777320352423}
   - component: {fileID: 4346516920283389333}
   - component: {fileID: 6294146849643225578}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 3234329507590272120}
   - component: {fileID: 9066323240213691312}
   - component: {fileID: 152626513099506861}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -901,7 +901,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 2525915350374720008}
   - component: {fileID: 6586294144075066742}
   - component: {fileID: 2052983003907115914}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,7 +1036,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1085,7 +1085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6096417601843177876}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Ragdoll Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 6466199879562376299}
   - component: {fileID: 3057388605406313030}
   - component: {fileID: 8106033008318943609}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.5
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 8131597353753402970}
   - component: {fileID: 4727110225445335330}
   - component: {fileID: 805777995293027906}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 2393065608639171942}
   - component: {fileID: 296025116743751146}
   - component: {fileID: 3260819947221466854}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1425,7 +1425,7 @@ GameObject:
   - component: {fileID: 1417541593837221747}
   - component: {fileID: 1166144065213402091}
   - component: {fileID: 7147329674938756064}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

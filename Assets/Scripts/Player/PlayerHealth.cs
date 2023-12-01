@@ -39,7 +39,11 @@ public class PlayerHealth : MonoBehaviour, EntityHealth
         playerModel.SetActive(false);
 
         //Death animation
-        GameObject ragdoll = Instantiate(ragdollPlayerPrefab, this.transform.position, transform.rotation, this.transform);
+        GameObject ragdoll = Instantiate(ragdollPlayerPrefab, new Vector3(this.transform.position.x, 1, this.transform.position.z), transform.rotation, this.transform);
+        foreach (Transform piece in ragdoll.transform)
+        {
+            piece.GetComponent<Rigidbody>().AddForce(transform.forward * Random.Range(-2f, 2f), ForceMode.Impulse);
+        }
         Destroy(ragdoll, 4f);
     }
 

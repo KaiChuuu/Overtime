@@ -18,6 +18,8 @@ public class CanvasManager : MonoBehaviour
     public bool muteAudio = false;
 
     /// Game Scene
+    public GameObject gameLightFilter;
+
     public float gameIntroOutroDelay = 5f;
     private float timer = 0f;
     private bool gameIntroPlaying = false;
@@ -130,6 +132,7 @@ public class CanvasManager : MonoBehaviour
         audioManager.UnmuteEnvironmentAudio();
 
         scenePanels[0].SetActive(false);
+        gameLightFilter.SetActive(true);
 
         gameManager.GameIntro();
         gameIntroPlaying = true;
@@ -194,6 +197,7 @@ public class CanvasManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
+        gameLightFilter.SetActive(false);
         scenePanels[2].SetActive(true);
 
         gameManager.EndScreen();
@@ -209,10 +213,12 @@ public class CanvasManager : MonoBehaviour
         gameOutroPlaying = true;
 
         scenePanels[2].SetActive(false);
+        gameLightFilter.SetActive(true);
     }
 
     public void GameMenu()
     {
+        gameLightFilter.SetActive(false);
         scenePanels[0].SetActive(true);
     }
 
