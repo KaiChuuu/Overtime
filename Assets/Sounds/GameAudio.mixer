@@ -105,6 +105,8 @@ AudioMixerController:
     name: BgMusicVolume
   - guid: a0820b57d9d4e214ab27071a6f8b9526
     name: EnvVolume
+  - guid: 8a8f504064ecde94abfca8d513c2eb6e
+    name: GameVolume
   m_AudioMixerGroupViews:
   - guids:
     - 7aee3dea3675db445adff27a8b85bfe2

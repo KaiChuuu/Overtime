@@ -61,7 +61,7 @@ public class CanvasManager : MonoBehaviour
     public TMPro.TMP_Text finalPlayerName;
 
     /// Leaderboard Scene
-    public LeaderboardDisplay leaderboardDisplay;
+    public LeaderboardDisplay leaderboardDisplay; 
 
     void Start()
     {
@@ -73,6 +73,7 @@ public class CanvasManager : MonoBehaviour
         scenePanels[1].SetActive(false);
         scenePanels[2].SetActive(false);
         scenePanels[3].SetActive(false);
+        scenePanels[4].SetActive(false);
 
         gameManager.GameSetup();
     }
@@ -217,6 +218,8 @@ public class CanvasManager : MonoBehaviour
 
     public void LeaderboardScene()
     {
+        audioManager.DefaultButtonAudio();
+
         scenePanels[0].SetActive(false);
         scenePanels[3].SetActive(true);
 
@@ -225,8 +228,26 @@ public class CanvasManager : MonoBehaviour
 
     public void ToMenuFromLeaderboard()
     {
+        audioManager.DefaultButtonAudio();
+
         scenePanels[0].SetActive(true);
         scenePanels[3].SetActive(false);
+    }
+
+    public void InformationScene()
+    {
+        audioManager.DefaultButtonAudio();
+
+        scenePanels[0].SetActive(false);
+        scenePanels[4].SetActive(true);
+    }
+
+    public void ToMenuFromInformation()
+    {
+        audioManager.DefaultButtonAudio();
+
+        scenePanels[0].SetActive(true);
+        scenePanels[4].SetActive(false);
     }
 
     ////////////////////////////////////////////////////
