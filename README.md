@@ -1,5 +1,5 @@
-# Welcome to my 2023 Game Jam game, OVERTIME!
-[(2023 Game Jam Theme is SCALE)](https://itch.io/jam/game-off-2023)
+# Welcome to my 2023 Github Game Jam game, OVERTIME!
+[(2023 Github Game Jam Theme is SCALE)](https://itch.io/jam/game-off-2023)
 
 Hello fellow game jammers!
 I wanted to thank everyone who will or have played my game Overtime!
